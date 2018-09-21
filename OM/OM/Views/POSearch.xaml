@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.POSearch"
+             Title="Search Purchase Orders">
+    <ContentPage.Content>
+        <StackLayout x:Name="SearchEntriesStack" VerticalOptions="StartAndExpand">
+            
+
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="40, 0, 40, 0" 
+                            WinPhone="40, 0, 40, 0" 
+                            iOS="40, 0, 40, 0"/>
+            </StackLayout.Padding>
+
+            <ActivityIndicator x:Name="ActivitySpinner" Color="White" IsRunning="True" />
+
+            <SearchBar x:Name="SearchPO" SearchButtonPressed="SearchPOProcedure" />
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

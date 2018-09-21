@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.Dashboard"
+             Title="Dashboard">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Start">
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="40, 0, 40, 0" 
+                            WinPhone="40, 0, 40, 0" 
+                            iOS="40, 0, 40, 0"/>
+            </StackLayout.Padding>
+
+            <Grid Padding="0" Margin="0" VerticalOptions="Start">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="1" Source="neworder256.png" HorizontalOptions="Start" HeightRequest="128" WidthRequest="128">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                    Tapped="NewPOProcedure"
+                    NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Grid.Row="1" Source="openorder256.png" HorizontalOptions="End" HeightRequest="128" WidthRequest="128">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                    Tapped="ShowPOListProcedure"
+                    NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Grid.Row="2" Source="quickdelivery256.png" HorizontalOptions="Start" HeightRequest="128" WidthRequest="128">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                Tapped="QuickDeliveryProcedure"
+                NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Grid.Row="2" Source="deliverynotes256.png" HorizontalOptions="End" HeightRequest="128" WidthRequest="128">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                Tapped="DeliveryNoteProcedure"
+                NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Grid.Row="3" Source="creditnotes256.png" HorizontalOptions="Start" HeightRequest="128" WidthRequest="128">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                Tapped="CreditNoteProcedure"
+                NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Grid.Row="3" Source="suppliers256.png" HorizontalOptions="End" HeightRequest="128" WidthRequest="128">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                Tapped="SupplierProcedure"
+                NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </Grid>
+            <StackLayout VerticalOptions="End">
+                <Button Text="Logout" Clicked="LogoutProcedure" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

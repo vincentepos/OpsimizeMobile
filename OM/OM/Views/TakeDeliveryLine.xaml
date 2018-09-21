@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.TakeDeliveryLine"
+             Title="Qty Received">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="30, 30, 30, 0" 
+                            WinPhone="30, 30, 30, 0" 
+                            iOS="30, 30, 30, 0"/>
+            </StackLayout.Padding>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Text="Code:" TextColor="White" />
+                <Label Grid.Row="1" Text="Description:" TextColor="White" />
+                <Label Grid.Row="2" Text="Order Size:" TextColor="White" />
+                <Label Grid.Row="3" Text="Quantity:" TextColor="White" />
+                <Label Grid.Row="4" Text="Received:" TextColor="White" />
+                <Label Grid.Row="0" x:Name="CodeText" HorizontalTextAlignment="End" FontSize="Small" />
+                <Label Grid.Row="1" x:Name="DescriptionText" HorizontalTextAlignment="End" FontSize="Small" />
+                <Label Grid.Row="2" x:Name="OrderSizeText" HorizontalTextAlignment="End" FontSize="Small" />
+                <Label Grid.Row="3" x:Name="QtyText" HorizontalTextAlignment="End" FontSize="Small" />
+                <Entry Grid.Row="4" x:Name="ReceivedText" HorizontalTextAlignment="End" FontSize="Small" TextChanged="qtyChange" />
+            </Grid>
+
+            <Grid>
+                <Button Grid.Column="0" Text="Save" Clicked="SaveDeliveryNoteLineProcess" />
+                <Button Grid.Column="1" Text="Cancel" Clicked="CancelDeliveryNoteProcess" />
+            </Grid>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

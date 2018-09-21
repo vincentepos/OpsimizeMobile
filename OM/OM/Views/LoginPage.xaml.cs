@@ -1,0 +1,79 @@
+﻿using Newtonsoft.Json;
+using OM.Data;
+using OM.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace OM.Views
+{
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class LoginPage : ContentPage
+	{
+		public LoginPage ()
+		{
+			InitializeComponent ();
+            Init();
+		}
+
+        void Init()
+        {
+            BackgroundColor = Constants.BackgroundColor;
+            Lbl_Username.TextColor = Constants.MainTextColor;
+            Lbl_Password.TextColor = Constants.MainTextColor;
+            ActivitySpinner.IsVisible = false;
+            LoginIcon.HeightRequest = Constants.LoginIconHeight;
+
+            Entry_Username.Completed += (s, e) => Entry_Password.Focus();
+            Entry_Password.Completed += (s, e) => SignInProcedure(s, e);
+        }
+
+        async void SignInProcedure(object sender, EventArgs e)
+        {
+            User user = new User(Entry_Username.Text, Entry_Password.Text);
+            var client = new HttpClient();
+            client.MaxResponseContentBufferSize = 256000;
+            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(user.Username + ":" + user.Password));
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+            
+            try 
+            {
+                var response = await client.GetStringAsync(Constants.LoginUrl);
+                Console.WriteLine(response);
+                Tokens result = JsonConvert.DeserializeObject<Tokens>(response);
+                if (result != null)
+                {
+                    await DisplayAlert("Login", "Login Success", "Ok");
+
+                    if (Device.OS == TargetPlatform.Android)
+                    {
+                        Application.Current.MainPage = new NavigationPage(new Dashboard(user));
+                    }
+                    else if (Device.OS == TargetPlatform.iOS)
+                    {
+                        await Navigation.PushModalAsync(new NavigationPage(new Dashboard(user)));
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Login", "Login Failed, username and password do not match", "Ok");
+                }
+                
+            }
+            catch
+            {
+                await DisplayAlert("Login", "Login Failed, username and password do not match", "Ok");
+            }
+        }
+
+    }
+}

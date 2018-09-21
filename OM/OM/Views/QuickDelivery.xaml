@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.QuickDelivery"
+             Title="Quick Delivery">
+    <ContentPage.Content>
+        <StackLayout x:Name="SearchEntriesStack" VerticalOptions="StartAndExpand">
+
+
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="40, 0, 40, 0" 
+                            WinPhone="40, 0, 40, 0" 
+                            iOS="40, 0, 40, 0"/>
+            </StackLayout.Padding>
+
+            <ActivityIndicator x:Name="ActivitySpinner" Color="White" IsRunning="True" />
+
+            <Label x:Name="Lbl_POOrderRef" Text="Order Reference" />
+            <Entry x:Name="Entry_POOrderRef" />
+            <Label x:Name="Lbl_InvoiceRef" Text="Invoice Reference" />
+            <Entry x:Name="Entry_InvoiceRef" />
+            <Label x:Name="Lbl_DNRef" Text="Delivery Note Reference" />
+            <Entry x:Name="Entry_DNRef" />
+            <Label x:Name="Lbl_OrderTotal" Text="Order Total" />
+            <Entry x:Name="Entry_OrderTotal" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
