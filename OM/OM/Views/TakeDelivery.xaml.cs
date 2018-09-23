@@ -80,7 +80,15 @@ namespace OM.Views
             var content = new StringContent(jstring, Encoding.UTF8, "application/json");
             var response = client.PostAsync(Constants.PostDeliveryUrl, content);
 
-            await DisplayAlert("Uploaded", "Delivery Line changes have been uploaded to the server.", "Ok");
+            if (response != null)
+            {
+                await DisplayAlert("Uploaded", "Delivery Line changes have been uploaded to the server.", "Ok");
+            }
+            else
+            {
+                await DisplayAlert("Not Uploaded", "Changes has been uploaded to the server before.", "Ok");
+            }
+
             await Navigation.PopModalAsync();
             
         }
