@@ -78,9 +78,11 @@ namespace OM.Views
             
             var jstring = JsonConvert.SerializeObject(DNLineList);
             var content = new StringContent(jstring, Encoding.UTF8, "application/json");
-            var response = client.PostAsync(Constants.PostDeliveryUrl, content);
+            var response = client.PostAsync(Constants.PostDeliveryUrl, content).Result;
+            var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
+            Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
 
-            if (response != null)
+            if (result.Response == true)
             {
                 await DisplayAlert("Uploaded", "Delivery Line changes have been uploaded to the server.", "Ok");
             }
