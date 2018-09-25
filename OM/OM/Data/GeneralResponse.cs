@@ -3,8 +3,6 @@ namespace OM.Data
 {
     public class GeneralResponse
     {
-        public GeneralResponse()
-        {
-        }
+        public bool Response { get; set; }
     }
 }
