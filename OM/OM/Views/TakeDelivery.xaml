@@ -25,7 +25,7 @@
                                 <Label Grid.Row="1" Grid.Column="0" Text="Ordered:" TextColor="White" FontSize="Small" VerticalOptions="Center" />
                                 <Label Grid.Row="1" Grid.Column="1" Text="{Binding Qty}" TextColor="White" FontSize="Small" VerticalOptions="Center" />
                                 <Label Grid.Row="1" Grid.Column="2" Text="Received:" TextColor="White" FontSize="Small" VerticalOptions="Center" />
-                                <Entry Grid.Row="1" Grid.Column="3" Text="{Binding QtyReceived}" TextColor="Black" FontSize="Small" TextChanged="QtyChange" VerticalOptions="Center" BackgroundColor="White"/>
+                                <Entry Grid.Row="1" Grid.Column="3" x:Name="QTY_REC" Text="{Binding QtyReceived}" TextColor="Black" FontSize="Small" VerticalOptions="Center" BackgroundColor="White" TextChanged="QtyChange" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

@@ -58,13 +58,17 @@ namespace OM.Views
             }
             DNLinesListView.ItemsSource = ObjDNLineList.DNLines;
             DNLineList = ObjDNLineList;
+            DNLineList.PORef = item;
         }
-        
+
 
         void QtyChange(object sender, TextChangedEventArgs e)
         {
             qty = e.NewTextValue;
             Console.WriteLine("value of: " + qty);
+            Binding myBinding = new Binding(qty);
+            DNLinesListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
+            //QTY_REC = qty;
         }
 
         async void UpdateChangesProcedure()
