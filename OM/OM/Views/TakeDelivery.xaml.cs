@@ -32,6 +32,7 @@ namespace OM.Views
             Init();
             PopulateDNView(item);
             CameraButton.Clicked += CameraButton_Clicked;
+            BindingContext = new DNLine();
         }
 
         void Init()
@@ -55,6 +56,7 @@ namespace OM.Views
             if (dnlineJson != "")
             {
                 ObjDNLineList = JsonConvert.DeserializeObject<DeliveryNoteLines>(dnlineJson);
+                Console.WriteLine("Response: " + dnlineJson);
             }
             DNLinesListView.ItemsSource = ObjDNLineList.DNLines;
             DNLineList = ObjDNLineList;
@@ -64,10 +66,12 @@ namespace OM.Views
 
         void QtyChange(object sender, TextChangedEventArgs e)
         {
+            //var entry = sender as Entry;
+            //var text = entry.Text;
             qty = e.NewTextValue;
             Console.WriteLine("value of: " + qty);
-            Binding myBinding = new Binding(qty);
-            DNLinesListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
+            //Binding myBinding = new Binding(qty);
+            //DNLinesListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
             //QTY_REC = qty;
         }
 
