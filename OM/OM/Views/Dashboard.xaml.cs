@@ -67,7 +67,7 @@ namespace OM.Views
             await DisplayAlert("Alert", "Suppliers not implemented yet.", "Ok");
         }
 
-        void LogoutProcedure()
+        void LogoutProcedure(object sender, EventArgs e)
         {
             App.Current.MainPage = new NavigationPage(new LoginPage());
             DisplayAlert("Logout", "Logged Out", "Ok");

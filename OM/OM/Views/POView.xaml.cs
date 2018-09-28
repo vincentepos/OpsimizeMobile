@@ -76,7 +76,7 @@ namespace OM.Views
             GC.Collect();
         }
 
-        void TakeDeliveryProcess()
+        void TakeDeliveryProcess(object sender, EventArgs e)
         {
             Console.WriteLine("Item Order Ref: "+poref);
             Navigation.PushModalAsync(new TakeDelivery(poref, username, password));

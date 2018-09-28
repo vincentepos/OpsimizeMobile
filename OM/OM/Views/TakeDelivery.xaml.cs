@@ -75,7 +75,7 @@ namespace OM.Views
             //QTY_REC = qty;
         }
 
-        async void UpdateChangesProcedure()
+        async void UpdateChangesProcedure(object sender, EventArgs e)
         {
             var client = new HttpClient();
             client.MaxResponseContentBufferSize = 256000;
@@ -103,7 +103,7 @@ namespace OM.Views
             
         }
 
-        async void CancelChangesProcedure()
+        async void CancelChangesProcedure(object sender, EventArgs e)
         {
             await DisplayAlert("Canceled", "Delivery Line changes has been canceled.", "Ok");
             await Navigation.PopModalAsync();

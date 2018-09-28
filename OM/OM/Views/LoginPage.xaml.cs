@@ -4,6 +4,7 @@ using OM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -38,7 +39,12 @@ namespace OM.Views
         async void SignInProcedure(object sender, EventArgs e)
         {
             User user = new User(Entry_Username.Text, Entry_Password.Text);
-            var client = new HttpClient();
+
+            // Create an HttpClientHandler object and set to use default credentials
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.UseDefaultCredentials = true;
+
+            var client = new HttpClient(handler);
             client.MaxResponseContentBufferSize = 256000;
             client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -48,7 +54,7 @@ namespace OM.Views
             try 
             {
                 var response = await client.GetStringAsync(Constants.LoginUrl);
-                Console.WriteLine(response);
+                Console.WriteLine("Login Response: " + response);
                 Tokens result = JsonConvert.DeserializeObject<Tokens>(response);
                 if (result != null)
                 {
@@ -69,9 +75,11 @@ namespace OM.Views
                 }
                 
             }
-            catch
+            catch(HttpRequestException ex)
             {
-                await DisplayAlert("Login", "Login Failed, username and password do not match", "Ok");
+                Console.WriteLine("\nException Caught!");
+                Console.WriteLine("Message :{0} ", ex.Message);
+                await DisplayAlert("Login", "Login Error, Please try again", "Ok");
             }
         }
 

@@ -52,13 +52,13 @@ namespace OM.Views
             Console.WriteLine("value of: "+qty);
         }
 
-        async void SaveDeliveryNoteLineProcess()
+        async void SaveDeliveryNoteLineProcess(object sender, EventArgs e)
         {
             line.QtyReceived = Convert.ToDouble(qty);
             await Navigation.PopModalAsync();
         }
 
-        async void CancelDeliveryNoteProcess()
+        async void CancelDeliveryNoteProcess(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
         }
