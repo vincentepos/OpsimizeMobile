@@ -9,6 +9,7 @@ namespace OM.Data
     public class DeliveryNoteLines
     {
         public string PORef { get; set; }
+        public string Base64 { get; set; }
         public List<DNLine> DNLines { get; set; }
 
         

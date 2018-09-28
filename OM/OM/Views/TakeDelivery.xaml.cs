@@ -21,6 +21,7 @@ namespace OM.Views
         public string username;
         public string password;
         public string qty;
+        public string base64;
 
         public DeliveryNoteLines DNLineList = new DeliveryNoteLines();
 
@@ -66,20 +67,19 @@ namespace OM.Views
 
         void QtyChange(object sender, TextChangedEventArgs e)
         {
-            //var entry = sender as Entry;
-            //var text = entry.Text;
             qty = e.NewTextValue;
             Console.WriteLine("value of: " + qty);
-            //Binding myBinding = new Binding(qty);
-            //DNLinesListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
-            //QTY_REC = qty;
         }
 
         async void UpdateChangesProcedure(object sender, EventArgs e)
         {
+            //DNLineList.Base64 = base64;
+            //Console.WriteLine("Base64 String: " + DNLineList.Base64);
+            User loginuser = new User(username, password);
             var client = new HttpClient();
             client.MaxResponseContentBufferSize = 256000;
             client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
             client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
@@ -92,15 +92,17 @@ namespace OM.Views
 
             if (result.Response == true)
             {
-                await DisplayAlert("Uploaded", "Delivery Line changes have been uploaded to the server.", "Ok");
+                //App.Current.MainPage = new NavigationPage(new OpenPOList(username, password));
+                await DisplayAlert("Uploaded", result.Message, "Ok");
             }
             else
             {
-                await DisplayAlert("Not Uploaded", "Changes has been uploaded to the server before.", "Ok");
+                //await Navigation.PopModalAsync();
+                await DisplayAlert("Not Uploaded", result.Message, "Ok");
             }
 
             await Navigation.PopModalAsync();
-            
+
         }
 
         async void CancelChangesProcedure(object sender, EventArgs e)
@@ -109,7 +111,7 @@ namespace OM.Views
             await Navigation.PopModalAsync();
         }
 
-        private async void CameraButton_Clicked(object sender, EventArgs e)
+        async void CameraButton_Clicked(object sender, EventArgs e)
         {
             await CrossMedia.Current.Initialize();
             //var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
@@ -138,6 +140,9 @@ namespace OM.Views
                 PhotoImage.Source = ImageSource.FromStream(() =>
                 {
                     var stream = file.GetStream();
+                    byte[] bytes = new byte[stream.Length];
+                    stream.Read(bytes, 0, (int)stream.Length);
+                    base64 = System.Convert.ToBase64String(bytes);
                     file.Dispose();
                     return stream;
                 });
