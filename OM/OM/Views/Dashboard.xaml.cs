@@ -30,6 +30,9 @@ namespace OM.Views
             password = user.Password;
 			InitializeComponent ();
             Init();
+            User users = new User();
+            users = user;
+            Console.WriteLine("Username: " + users.Username);
         }        
 
         void Init()
@@ -44,7 +47,7 @@ namespace OM.Views
 
         async void NewPOProcedure(object sender, EventArgs e)
         {
-            await DisplayAlert("Alert", "New Order not implemented yet.", "Ok");
+            await Navigation.PushAsync(new NewPO(username, password));
         }
 
         async void QuickDeliveryProcedure(object sender, EventArgs e)

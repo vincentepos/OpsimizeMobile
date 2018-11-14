@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.NewPO"
+             Title="New Purchase Order">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="30, 10, 30, 0"  
+                            iOS="30, 10, 30, 0"/>
+            </StackLayout.Padding>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Text="Order Ref:" TextColor="White" />
+                <Label Grid.Row="0" x:Name="OrderRefText" HorizontalTextAlignment="End" FontSize="Small" />
+                <Label Grid.Row="1" Text="Delivery Date:" TextColor="White" />
+                <Label Grid.Row="1" x:Name="DeliveryDateText" HorizontalTextAlignment="End" FontSize="Small" />
+                <Label Grid.Row="2" Text="Ordered By:" TextColor="White" />
+                <Label Grid.Row="2" x:Name="OrderedByText" HorizontalTextAlignment="End" FontSize="Small" />
+                <Label Grid.Row="3" Text="Status:" TextColor="White" />
+                <Label Grid.Row="3" x:Name="StatusText" HorizontalTextAlignment="End" FontSize="Small" />
+                <Label Grid.Row="4" Text="Order For:" TextColor="White" />
+                <Label Grid.Row="4" x:Name="OrderForText" HorizontalTextAlignment="End" FontSize="Small" />
+                <Picker Grid.Row="5" x:Name="SitePicker" Title="Select Site" ItemsSource="{Binding Sites}" ItemDisplayBinding="{Binding SiteName}"  FontSize="Small" TextColor="White" />
+            </Grid>
+
+            <Grid>
+                <Button Text="Add Products" Clicked="AddProductsProcedure" BackgroundColor="Silver" TextColor="Black"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

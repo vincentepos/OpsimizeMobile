@@ -14,6 +14,8 @@ namespace OM.Data
         public string Status { get; set; }
         public string SubStatus { get; set; }
         public string User { get; set; }
+        public DateTime DeliveryDate { get; set; }
+        public string OrderFor { get; set; }
 
         public PO() { }
         public PO(string OrderRef)
