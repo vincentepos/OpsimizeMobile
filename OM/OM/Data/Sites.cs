@@ -8,17 +8,24 @@ namespace OM.Data
 {
     public class Site : INotifyPropertyChanged
     {
+        public string PORef { get; set; }
         public string SiteName { get; set; }
+        public long SiteID { get; set; }
 
-        public string SiteSel
+        Site selectedSite;
+        public Site SelectedSite
         {
-            get { return SiteName; }
+            get { return selectedSite; }
             set
             {
-                SiteName = value;
-                OnPropertyChanged();
+                if (selectedSite != value)
+                {
+                    selectedSite = value;
+                    OnPropertyChanged();
+                }
             }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -30,6 +37,8 @@ namespace OM.Data
 
     public class Sites
     {
+        public string PORef { get; set; }
+        public long SiteID { get; set; }
         public List<Site> AllSites { get; set; }
     }
 

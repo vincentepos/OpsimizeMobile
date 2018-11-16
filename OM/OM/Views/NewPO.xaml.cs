@@ -21,6 +21,9 @@ namespace OM.Views
         public string username;
         public string password;
         public string OrderRef;
+        public string siteid;
+
+        public Site SiteUpdate = new Site();
 
         public NewPO (string un, string pw)
 		{
@@ -30,7 +33,8 @@ namespace OM.Views
             Init();
             GetSiteList();
             GetNewPO();
-		}
+            BindingContext = new Site();
+        }
 
         void Init()
         {
@@ -63,6 +67,8 @@ namespace OM.Views
             OrderedByText.Text = po.User;
             StatusText.Text = po.Status;
             OrderForText.Text = po.OrderFor;
+            SiteUpdate.PORef = po.OrderRef;
+            
             //PO result = JsonConvert.DeserializeObject<PO>(response);
         }
 
@@ -84,11 +90,36 @@ namespace OM.Views
             }
             SitePicker.ItemsSource = ObjSiteList.AllSites;
             SiteList = ObjSiteList.AllSites;
+            Console.WriteLine("Site: " + SiteIDText.Text);
+
         }
 
         async void AddProductsProcedure(object sender, EventArgs e)
         {
-            await DisplayAlert("Alert", "Not implemented yet.", "Ok");
+            if (SitePicker.SelectedItem != null)
+            {
+                Console.WriteLine("Site: " + SiteIDText.Text);
+                siteid = SiteIDText.Text;
+                SiteUpdate.SiteID = Convert.ToInt64(siteid);
+                var client = new HttpClient();
+                client.MaxResponseContentBufferSize = 256000;
+                client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+                client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+
+                var jstring = JsonConvert.SerializeObject(SiteUpdate);
+                var content = new StringContent(jstring, Encoding.UTF8, "application/json");
+                var response = client.PostAsync(Constants.POSiteUpdateUrl, content).Result;
+                var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
+                Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
+            }
+            else
+            {
+                await DisplayAlert("Alert", "Please Select a Site.", "Ok");
+            }
+            
         }
     }
 }

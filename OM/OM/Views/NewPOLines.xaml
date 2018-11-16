@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.NewPOLines"
+             Title="Add PO Lines">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="30, 10, 30, 0"  
+                            iOS="30, 10, 30, 0"/>
+            </StackLayout.Padding>
+            
+            <SearchBar x:Name="poline_search" Placeholder="Search" TextColor="White" BackgroundColor="Transparent"/>
+
+            <ListView x:Name="POLineListView" BackgroundColor="Transparent">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Switch Grid.Column="0" IsToggled="{Binding ProdToggle}" />
+                                <Label Grid.Column="1" Text="{Binding Code}" TextColor="White" FontSize="Small" />
+                                <Label Grid.Column="2" Text="{Binding Name}" TextColor="White" FontSize="Small" />
+                                <Label Grid.Column="3" Text="{Binding Supplier}" TextColor="White" FontSize="Small" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
