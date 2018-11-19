@@ -7,26 +7,27 @@
         <StackLayout>
             <StackLayout.Padding>
                 <OnPlatform x:TypeArguments="Thickness" 
-                            Android="30, 10, 30, 0"  
-                            iOS="30, 10, 30, 0"/>
+                            Android="20, 10, 30, 0"  
+                            iOS="20, 10, 30, 0"/>
             </StackLayout.Padding>
             
             <SearchBar x:Name="poline_search" Placeholder="Search" TextColor="White" BackgroundColor="Transparent"/>
 
-            <ListView x:Name="POLineListView" BackgroundColor="Transparent">
+            <ListView x:Name="POLineListView" BackgroundColor="Transparent" ItemTapped="OnItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
-                                <Switch Grid.Column="0" IsToggled="{Binding ProdToggle}" />
-                                <Label Grid.Column="1" Text="{Binding Code}" TextColor="White" FontSize="Small" />
-                                <Label Grid.Column="2" Text="{Binding Name}" TextColor="White" FontSize="Small" />
-                                <Label Grid.Column="3" Text="{Binding Supplier}" TextColor="White" FontSize="Small" />
+                                <Label Grid.Column="0" Text="{Binding Code}" TextColor="White" FontSize="Small" />
+                                <Label Grid.Column="1" Text="{Binding Name}" TextColor="White" FontSize="Small" />
+                                <Label Grid.Column="2" Text="{Binding Supplier}" TextColor="White" FontSize="Small" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <Button Text="Done" Clicked="AddProductsDoneProcedure" BackgroundColor="Silver" TextColor="Black"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

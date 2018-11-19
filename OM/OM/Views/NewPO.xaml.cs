@@ -18,10 +18,17 @@ namespace OM.Views
 	public partial class NewPO : ContentPage
 	{
         public List<Site> SiteList = new List<Site>();
+        public List<ProductLine> POProducts = new List<ProductLine>();
+        public POProducts POProductsList = new POProducts();
         public string username;
         public string password;
         public string OrderRef;
         public string siteid;
+        public string _OrderStatus;
+        public string _OrderFor;
+        public string _OrderBy;
+        public DateTime _OrderDeliveryDate;
+        public string _Site;
 
         public Site SiteUpdate = new Site();
 
@@ -68,7 +75,13 @@ namespace OM.Views
             StatusText.Text = po.Status;
             OrderForText.Text = po.OrderFor;
             SiteUpdate.PORef = po.OrderRef;
-            
+            POProductsList.OrderRef = po.OrderRef;
+            OrderRef = po.OrderRef;
+            _OrderBy = po.User;
+            _OrderDeliveryDate = po.DeliveryDate;
+            _OrderFor = po.OrderFor;
+            _OrderStatus = po.Status;
+
             //PO result = JsonConvert.DeserializeObject<PO>(response);
         }
 
@@ -91,6 +104,7 @@ namespace OM.Views
             SitePicker.ItemsSource = ObjSiteList.AllSites;
             SiteList = ObjSiteList.AllSites;
             Console.WriteLine("Site: " + SiteIDText.Text);
+            
 
         }
 
@@ -114,6 +128,9 @@ namespace OM.Views
                 var response = client.PostAsync(Constants.POSiteUpdateUrl, content).Result;
                 var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
                 Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
+
+                Console.WriteLine("Pass Items: " + OrderRef + " " + _OrderStatus + " " + _OrderFor + " " + _OrderBy);
+                await Navigation.PushAsync(new NewPOLines(username, password, OrderRef, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate));
             }
             else
             {
@@ -121,5 +138,7 @@ namespace OM.Views
             }
             
         }
+
+        
     }
 }

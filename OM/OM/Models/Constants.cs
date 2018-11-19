@@ -48,6 +48,9 @@ namespace OM.Models
         ////-------------PO Products---------------//
         //public static string POProductsUrl = "https://app.opsimize.com/rest/mobileapp/v1/PurchaceOrder/POProducts";
 
+        ////-------------PO Lines Post---------------//
+        //public static string POLinesPostUrl = "https://app.opsimize.com/rest/mobileapp/v1/PurchaceOrder/POLines";
+
         //-------------Login------------//
         public static string LoginUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/Token";
 
@@ -80,5 +83,8 @@ namespace OM.Models
 
         //-------------PO POProducts---------------//
         public static string POProductsUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/PurchaceOrder/POProducts";
+
+        //-------------PO Lines Post---------------//
+        public static string POLinesPostUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/PurchaceOrder/POLines";
     }
 }
