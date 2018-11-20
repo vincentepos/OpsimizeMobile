@@ -32,15 +32,19 @@
                 <Label Grid.Row="4" x:Name="OrderForText" HorizontalTextAlignment="End" FontSize="Small" />
             </Grid>
 
-            <ListView x:Name="POLineSumListView" BackgroundColor="Transparent">
+            <ListView x:Name="POLineSumListView" BackgroundColor="Transparent" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
-                                <Label Grid.Column="0" Text="{Binding Code}" TextColor="White" FontSize="Small" />
-                                <Label Grid.Column="1" Text="{Binding Name}" TextColor="White" FontSize="Small" />
-                                <Label Grid.Column="2" Text="{Binding Supplier}" TextColor="White" FontSize="Small" />
-                                <Entry Grid.Column="3" x:Name="PROQTY" Text="{Binding Qty}" TextColor="Black" FontSize="Small" BackgroundColor="White" TextChanged="QtyChange" />
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding Name}" TextColor="White" FontSize="Small" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding OrderSize}" TextColor="White" FontSize="Small" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                                <Entry Grid.Column="2" x:Name="PROQTY" Text="{Binding Qty}" TextColor="Black" FontSize="Small" VerticalOptions="Center" BackgroundColor="White" TextChanged="QtyChange" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

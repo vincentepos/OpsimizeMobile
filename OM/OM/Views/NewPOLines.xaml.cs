@@ -26,9 +26,9 @@ namespace OM.Views
         public string _OrderFor;
         public string _OrderBy;
         public DateTime _OrderDeliveryDate;
-        public string _Site;
+        public long _Site;
 
-        public NewPOLines (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate)
+        public NewPOLines (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, long SiteID)
 		{
             username = un;
             password = pw;
@@ -37,6 +37,7 @@ namespace OM.Views
             _OrderFor = OrderFor;
             _OrderBy = OrderBy;
             _OrderDeliveryDate = DeliveryDate;
+            _Site = SiteID;
             InitializeComponent ();
             Init();
             GetProduct();
@@ -94,15 +95,15 @@ namespace OM.Views
         void OnItemTapped(Object sender, ItemTappedEventArgs e)
         {
             var dataItem = (ProductLine)(e.Item);
-            Items.Add(new ProductLine { Code = dataItem.Code, Name = dataItem.Name, Supplier = dataItem.Supplier, ProductID = dataItem.ProductID });
-            PROItems.Add(new ProductLine { Code = dataItem.Code, Name = dataItem.Name, Supplier = dataItem.Supplier, ProductID = dataItem.ProductID });
+            Items.Add(new ProductLine { Code = dataItem.Code, Name = dataItem.Name, Supplier = dataItem.Supplier, ProductID = dataItem.ProductID, OrderSize = dataItem.OrderSize });
+            PROItems.Add(new ProductLine { Code = dataItem.Code, Name = dataItem.Name, Supplier = dataItem.Supplier, ProductID = dataItem.ProductID, OrderSize = dataItem.OrderSize });
             Console.WriteLine("Item Added :" + PROItems);
-            DisplayAlert("Item Added", "Product added to Purchase Order", "Ok");
+            DisplayAlert("Item Added", dataItem.Name + " added to Purchase Order", "Ok");
         }
 
         async void AddProductsDoneProcedure(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewPOView(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, PROItems));
+            await Navigation.PushAsync(new NewPOView(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, PROItems, _Site));
         }
     }
 }

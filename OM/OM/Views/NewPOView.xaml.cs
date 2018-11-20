@@ -28,8 +28,9 @@ namespace OM.Views
         public string _OrderBy;
         public DateTime _OrderDeliveryDate;
         public string qty;
+        public long _Site;
 
-        public NewPOView (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, List<ProductLine> Products)
+        public NewPOView (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, List<ProductLine> Products, long SiteID)
 		{
             username = un;
             password = pw;
@@ -39,6 +40,7 @@ namespace OM.Views
             _OrderFor = OrderFor;
             _OrderBy = OrderBy;
             _OrderDeliveryDate = DeliveryDate;
+            _Site = SiteID;
             user.Username = un;
             user.Password = pw;
             POProductsList.OrderRef = _OrderReference;
@@ -77,7 +79,7 @@ namespace OM.Views
         async void SaveProductsProcedure(object sender, EventArgs e)
         {
             POProductsList.Lines = Items;
-            
+            POProductsList.SiteID = _Site;
             Console.WriteLine("Root Order Ref End: " + POProductsList.OrderRef);
             var client = new HttpClient();
             client.MaxResponseContentBufferSize = 256000;
@@ -96,7 +98,7 @@ namespace OM.Views
             if (result.Response == true)
             {
                 App.Current.MainPage = new NavigationPage(new Dashboard(user));
-                await DisplayAlert("Successful", "Purchase Order Successfully Created", "Ok");
+                await DisplayAlert("Successful", "Purchase Order(s) Successfully Created", "Ok");
             }
             else
             {
