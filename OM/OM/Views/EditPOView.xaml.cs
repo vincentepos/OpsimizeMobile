@@ -120,7 +120,7 @@ namespace OM.Views
 
             var jstring = JsonConvert.SerializeObject(POProductsList);
             var content = new StringContent(jstring, Encoding.UTF8, "application/json");
-            var response = client.PostAsync(Constants.POLinesPostUrl, content).Result;
+            var response = client.PostAsync(Constants.POLinesPostSendUrl, content).Result;
             var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
             Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
 

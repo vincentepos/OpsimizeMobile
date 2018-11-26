@@ -6,6 +6,8 @@ namespace OM.Data
 {
     class POLines
     {
+        public string OrderRef { get; set; }
+        public long SiteID { get; set; }
         public List<Line> Lines { get; set; }
     }
 
@@ -20,5 +22,6 @@ namespace OM.Data
         public double Gross { get; set; }
         public long ProductID { get; set; }
         public string Supplier { get; set; }
+        public long POLineID { get; set; }
     }
 }

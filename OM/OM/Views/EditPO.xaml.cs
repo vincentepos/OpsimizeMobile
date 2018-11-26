@@ -29,11 +29,14 @@ namespace OM.Views
         public long _Site;
         public Site SiteUpdate = new Site();
         public string qty;
+        public User user = new User();
 
         public EditPO (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, long SiteID)
 		{
             username = un;
             password = pw;
+            user.Username = un;
+            user.Password = pw;
             _OrderReference = OrderRef;
             _OrderStatus = Status;
             _OrderFor = OrderFor;
@@ -45,7 +48,7 @@ namespace OM.Views
             InitializeComponent ();
             Init();
             EditPOView();
-            BindingContext = new ProductLine();
+            BindingContext = new Line();
         }
 
         void Init()
@@ -101,12 +104,67 @@ namespace OM.Views
 
         async void SavePOProcedure(object sender, EventArgs e)
         {
+            POLines PostPOLines = new POLines();
+            PostPOLines.Lines = LineList;
+            PostPOLines.SiteID = _Site;
+            PostPOLines.OrderRef = _OrderReference;
+
+            var client = new HttpClient();
+            client.MaxResponseContentBufferSize = 256000;
+            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+
+            var jstring = JsonConvert.SerializeObject(PostPOLines);
+            var content = new StringContent(jstring, Encoding.UTF8, "application/json");
+            var response = client.PostAsync(Constants.SavePOUrl, content).Result;
+            var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
+            Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
+
+            if (result.Response == true)
+            {
+                App.Current.MainPage = new NavigationPage(new Dashboard(user));
+                await DisplayAlert("Successful", "Purchase Order Successfully Saved", "Ok");
+            }
+            else
+            {
+                await DisplayAlert("Save Failed", result.Message, "Ok");
+            }
 
         }
 
         async void SendPOProcedure(object sender, EventArgs e)
         {
+            POLines PostPOLines = new POLines();
+            PostPOLines.Lines = LineList;
+            PostPOLines.SiteID = _Site;
+            PostPOLines.OrderRef = _OrderReference;
 
+            var client = new HttpClient();
+            client.MaxResponseContentBufferSize = 256000;
+            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+
+            var jstring = JsonConvert.SerializeObject(PostPOLines);
+            var content = new StringContent(jstring, Encoding.UTF8, "application/json");
+            var response = client.PostAsync(Constants.SendPOUrl, content).Result;
+            var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
+            Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
+
+            if (result.Response == true)
+            {
+                App.Current.MainPage = new NavigationPage(new Dashboard(user));
+                await DisplayAlert("Successful", "Purchase Order Successfully Send", "Ok");
+            }
+            else
+            {
+                await DisplayAlert("Send Failed", result.Message, "Ok");
+            }
         }
     }
 }

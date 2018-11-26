@@ -16,7 +16,8 @@ namespace OM.Models
         public static int LoginIconHeight = 120;
 
         //-------------Base URL------------//
-        public static string BaseURL = "https://app.opsimize.com/rest/mobileapp/v1/";
+        //public static string BaseURL = "https://app.opsimize.com/rest/mobileapp/v1/";
+        public static string BaseURL = "http://opsimize.eposability.com/rest/mobileapp/v1/";
         //public static string BaseURL = "http://10.0.2.2:8081/rest/mobileapp/v1/";
 
         //-------------Login------------//
@@ -54,5 +55,14 @@ namespace OM.Models
 
         //-------------PO Lines Post---------------//
         public static string POLinesPostUrl = BaseURL + "PurchaceOrder/POLines";
+
+        //-------------PO Lines Post with Send---------------//
+        public static string POLinesPostSendUrl = BaseURL + "PurchaceOrder/POLinesSend";
+
+        //-------------Save PO---------------//
+        public static string SendPOUrl = BaseURL + "PurchaceOrder/SendPO";
+
+        //-------------Send PO---------------//
+        public static string SavePOUrl = BaseURL + "PurchaceOrder/SavePO";
     }
 }
