@@ -18,5 +18,7 @@ namespace OM.Data
         public double Net { get; set; }
         public double VAT { get; set; }
         public double Gross { get; set; }
+        public long ProductID { get; set; }
+        public string Supplier { get; set; }
     }
 }

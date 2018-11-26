@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OM.Views.NewPOView"
-             Title="Purchase Order Summary">
+             x:Class="OM.Views.EditPO"
+             Title="Edit Purchase Order">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout.Padding>
@@ -57,10 +57,12 @@
             </ListView>
 
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Button Text="Save Purchase Order" Clicked="SaveProductsProcedure" BackgroundColor="Silver" TextColor="Black"/>
+                <Button Text="Add Products" Clicked="AddProductsProcedure" BackgroundColor="Silver" TextColor="Black"/>
+            </Grid>
+
+            <Grid>
+                <Button Text="Save" Clicked="SavePOProcedure" BackgroundColor="Silver" TextColor="Black"/>
+                <Button Text="Send" Clicked="SendPOProcedure" BackgroundColor="Silver" TextColor="Black"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

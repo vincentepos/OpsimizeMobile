@@ -1,0 +1,112 @@
+﻿using Newtonsoft.Json;
+using OM.Data;
+using OM.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace OM.Views
+{
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class EditPO : ContentPage
+	{
+        public string username;
+        public string password;
+        public string _OrderReference;
+        public string _OrderStatus;
+        public string _OrderFor;
+        public string _OrderBy;
+        public DateTime _OrderDeliveryDate;
+        public List<Line> LineList = new List<Line>();
+        public List<ProductLine> PROItems = new List<ProductLine>();
+        public long _Site;
+        public Site SiteUpdate = new Site();
+        public string qty;
+
+        public EditPO (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, long SiteID)
+		{
+            username = un;
+            password = pw;
+            _OrderReference = OrderRef;
+            _OrderStatus = Status;
+            _OrderFor = OrderFor;
+            _OrderBy = OrderBy;
+            _OrderDeliveryDate = DeliveryDate;
+            _Site = SiteID;
+            SiteUpdate.PORef = OrderRef;
+            SiteUpdate.SiteID = SiteID;
+            InitializeComponent ();
+            Init();
+            EditPOView();
+            BindingContext = new ProductLine();
+        }
+
+        void Init()
+        {
+            BackgroundColor = Constants.BackgroundColor;
+            DeliveryDateText.TextColor = Constants.MainTextColor;
+            OrderRefText.TextColor = Constants.MainTextColor;
+            OrderedByText.TextColor = Constants.MainTextColor;
+            OrderForText.TextColor = Constants.MainTextColor;
+            StatusText.TextColor = Constants.MainTextColor;
+
+            DeliveryDateText.Text = _OrderDeliveryDate.ToString();
+            OrderRefText.Text = _OrderReference;
+            OrderedByText.Text = _OrderBy;
+            OrderForText.Text = _OrderFor;
+            StatusText.Text = _OrderStatus;
+        }
+
+        public async void EditPOView()
+        {
+            var client = new HttpClient();
+            client.MaxResponseContentBufferSize = 256000;
+            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+            var response = await client.GetAsync(Constants.PoLineUrl + "?PORef=" + _OrderReference);
+
+            var poJson = await response.Content.ReadAsStringAsync();
+            POLines ObjPOList = new POLines();
+            if (poJson != "")
+            {
+                ObjPOList = JsonConvert.DeserializeObject<POLines>(poJson);
+            }
+            POLineSumListView.ItemsSource = ObjPOList.Lines;
+            LineList = ObjPOList.Lines;
+            foreach (var item in LineList)
+            {
+                PROItems.Add(new ProductLine { Code = item.Code, Name = item.Description, Supplier = item.Supplier, ProductID = Convert.ToInt16(item.ProductID), OrderSize = item.OrderSize, Qty = item.Qty });
+            }
+        }
+
+        async void AddProductsProcedure(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new EditPOLines(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, _Site, PROItems));
+        }
+
+        void QtyChange(object sender, TextChangedEventArgs e)
+        {
+            qty = e.NewTextValue;
+            Console.WriteLine("value of: " + qty);
+        }
+
+        async void SavePOProcedure(object sender, EventArgs e)
+        {
+
+        }
+
+        async void SendPOProcedure(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

@@ -22,6 +22,7 @@ namespace OM.Data
         public string SubStatus { get; set; }
         public string User { get; set; }
         public string Supplier { get; set; }
+        public long SiteID { get; set; }
     }
 
     public class PurchaseOrders
