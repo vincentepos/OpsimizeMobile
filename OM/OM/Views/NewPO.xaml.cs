@@ -28,7 +28,7 @@ namespace OM.Views
         public string _OrderFor;
         public string _OrderBy;
         public DateTime _OrderDeliveryDate;
-        public string _Site;
+        public long _Site;
 
         public Site SiteUpdate = new Site();
 
@@ -81,6 +81,7 @@ namespace OM.Views
             _OrderDeliveryDate = po.DeliveryDate;
             _OrderFor = po.OrderFor;
             _OrderStatus = po.Status;
+            
 
             //PO result = JsonConvert.DeserializeObject<PO>(response);
         }
@@ -115,6 +116,7 @@ namespace OM.Views
                 Console.WriteLine("Site: " + SiteIDText.Text);
                 siteid = SiteIDText.Text;
                 SiteUpdate.SiteID = Convert.ToInt64(siteid);
+                _Site = SiteUpdate.SiteID;
                 var client = new HttpClient();
                 client.MaxResponseContentBufferSize = 256000;
                 client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
@@ -130,7 +132,7 @@ namespace OM.Views
                 Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
 
                 Console.WriteLine("Pass Items: " + OrderRef + " " + _OrderStatus + " " + _OrderFor + " " + _OrderBy);
-                await Navigation.PushAsync(new NewPOLines(username, password, OrderRef, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate));
+                await Navigation.PushAsync(new NewPOLines(username, password, OrderRef, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, _Site));
             }
             else
             {

@@ -15,76 +15,54 @@ namespace OM.Models
 
         public static int LoginIconHeight = 120;
 
-        ////-------------Login------------//
-        //public static string LoginUrl = "https://app.opsimize.com/rest/mobileapp/v1/Token";
-
-        ////-------------PO List---------------//
-        //public static string PoUrl = "https://app.opsimize.com/rest/mobileapp/v1/PurchaceOrderList";
-
-        ////-------------PO Ref---------------//
-        //public static string PoRefUrl = "https://app.opsimize.com/rest/mobileapp/v1/PurchaceOrder"; // ?PORef=14114282
-
-        ////-------------PO Line List---------------//
-        //public static string PoLineUrl = "https://app.opsimize.com/rest/mobileapp/v1/PurchaceOrderLines"; // ?PORef=1411428
-
-        ////-------------Take Delivery---------------//
-        //public static string TakeDeliveryUrl = "https://app.opsimize.com/rest/mobileapp/v1/TakeDelivery"; // ?OrderRef=1411428
-
-        ////-------------DN Line List---------------//
-        //public static string DNLineUrl = "https://app.opsimize.com/rest/mobileapp/v1/TakeDelivery/GetLines"; // ?PORef=1411428
-
-        ////-------------Post Delivery---------------//
-        //public static string PostDeliveryUrl = "https://app.opsimize.com/rest/mobileapp/v1/TakeDelivery/Delivery";
-
-        ////-------------PO Site List---------------//
-        //public static string POSitesUrl = "https://app.opsimize.com/rest/mobileapp/v1/PurchaceOrder/Sites";
-
-        ////-------------PO Create---------------//
-        //public static string POCreateUrl = "https://app.opsimize.com/rest/mobileapp/v1/PurchaceOrder/Create";
-
-        ////-------------PO Site Update---------------//
-        //public static string POSiteUpdateUrl = "https://app.opsimize.com/rest/mobileapp/v1/PurchaceOrder/POUpdate";
-
-        ////-------------PO Products---------------//
-        //public static string POProductsUrl = "https://app.opsimize.com/rest/mobileapp/v1/PurchaceOrder/POProducts";
-
-        ////-------------PO Lines Post---------------//
-        //public static string POLinesPostUrl = "https://app.opsimize.com/rest/mobileapp/v1/PurchaceOrder/POLines";
+        //-------------Base URL------------//
+        //public static string BaseURL = "https://app.opsimize.com/rest/mobileapp/v1/";
+        public static string BaseURL = "http://opsimize.eposability.com/rest/mobileapp/v1/";
+        //public static string BaseURL = "http://10.0.2.2:8081/rest/mobileapp/v1/";
 
         //-------------Login------------//
-        public static string LoginUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/Token";
+        public static string LoginUrl = BaseURL + "Token";
 
         //-------------PO List---------------//
-        public static string PoUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/PurchaceOrderList";
+        public static string PoUrl = BaseURL + "PurchaceOrderList";
 
         //-------------PO Ref---------------//
-        public static string PoRefUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/PurchaceOrder"; // ?PORef=14114282
+        public static string PoRefUrl = BaseURL + "PurchaceOrder"; // ?PORef=14114282
 
         //-------------PO Line List---------------//
-        public static string PoLineUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/PurchaceOrderLines"; // ?PORef=1411428
+        public static string PoLineUrl = BaseURL + "PurchaceOrderLines"; // ?PORef=1411428
 
         //-------------Take Delivery---------------//
-        public static string TakeDeliveryUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/TakeDelivery"; // ?OrderRef=1411428
+        public static string TakeDeliveryUrl = BaseURL + "TakeDelivery"; // ?OrderRef=1411428
 
         //-------------DN Line List---------------//
-        public static string DNLineUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/TakeDelivery/GetLines"; // ?PORef=1411428
+        public static string DNLineUrl = BaseURL + "TakeDelivery/GetLines"; // ?PORef=1411428
 
         //-------------Post Delivery---------------//
-        public static string PostDeliveryUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/TakeDelivery/Delivery";
+        public static string PostDeliveryUrl = BaseURL + "TakeDelivery/Delivery";
 
-        //-------------PO SIte List---------------//
-        public static string POSitesUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/PurchaceOrder/Sites";
+        //-------------PO Site List---------------//
+        public static string POSitesUrl = BaseURL + "PurchaceOrder/Sites";
 
         //-------------PO Create---------------//
-        public static string POCreateUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/PurchaceOrder/Create";
+        public static string POCreateUrl = BaseURL + "PurchaceOrder/Create";
 
         //-------------PO Site Update---------------//
-        public static string POSiteUpdateUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/PurchaceOrder/POUpdate";
+        public static string POSiteUpdateUrl = BaseURL + "PurchaceOrder/POUpdate";
 
-        //-------------PO POProducts---------------//
-        public static string POProductsUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/PurchaceOrder/POProducts";
+        //-------------PO Products---------------//
+        public static string POProductsUrl = BaseURL + "PurchaceOrder/POProducts";
 
         //-------------PO Lines Post---------------//
-        public static string POLinesPostUrl = "http://10.0.2.2:8081/rest/mobileapp/v1/PurchaceOrder/POLines";
+        public static string POLinesPostUrl = BaseURL + "PurchaceOrder/POLines";
+
+        //-------------PO Lines Post with Send---------------//
+        public static string POLinesPostSendUrl = BaseURL + "PurchaceOrder/POLinesSend";
+
+        //-------------Save PO---------------//
+        public static string SendPOUrl = BaseURL + "PurchaceOrder/SendPO";
+
+        //-------------Send PO---------------//
+        public static string SavePOUrl = BaseURL + "PurchaceOrder/SavePO";
     }
 }

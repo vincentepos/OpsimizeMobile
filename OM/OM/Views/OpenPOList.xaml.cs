@@ -66,7 +66,16 @@ namespace OM.Views
         public void PurchaseOrdersListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             Item item = (Item)e.Item;
-            Navigation.PushAsync(new POView(item, username, password));
+
+            if(item.Status == "Draft PO")
+            {
+                Navigation.PushAsync(new EditPO(username, password, item.OrderRef, item.Status,item.Location, item.User, item.DateOrdered, item.SiteID));
+            }
+            else
+            {
+                Navigation.PushAsync(new POView(item, username, password));
+            }
+            
         }
 
         void InitSearchBar()

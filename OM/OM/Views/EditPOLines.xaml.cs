@@ -15,7 +15,7 @@ using Xamarin.Forms.Xaml;
 namespace OM.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class NewPOLines : ContentPage
+	public partial class EditPOLines : ContentPage
 	{
         public List<ProductLine> Items = new List<ProductLine>();
         public List<ProductLine> PROItems = new List<ProductLine>();
@@ -28,8 +28,8 @@ namespace OM.Views
         public DateTime _OrderDeliveryDate;
         public long _Site;
 
-        public NewPOLines (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, long SiteID)
-		{
+        public EditPOLines(string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, long SiteID, List<ProductLine> Products)
+        {
             username = un;
             password = pw;
             _OrderReference = OrderRef;
@@ -38,7 +38,8 @@ namespace OM.Views
             _OrderBy = OrderBy;
             _OrderDeliveryDate = DeliveryDate;
             _Site = SiteID;
-            InitializeComponent ();
+            PROItems = Products;
+            InitializeComponent();
             Init();
             GetProduct();
             InitSearchBar();
@@ -103,7 +104,7 @@ namespace OM.Views
 
         async void AddProductsDoneProcedure(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewPOView(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, PROItems, _Site));
+            await Navigation.PushAsync(new EditPOView(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, PROItems, _Site));
         }
     }
 }

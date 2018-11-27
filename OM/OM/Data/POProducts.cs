@@ -9,6 +9,7 @@ namespace OM.Data
     public class POProducts
     {
         public string OrderRef { get; set; }
+        public long SiteID { get; set; }
         public List<ProductLine> Lines { get; set; }
     }
 
@@ -19,6 +20,7 @@ namespace OM.Data
         public int ProductID { get; set; }
         public string Code { get; set; }
         public double Qty { get; set; }
+        public string OrderSize { get; set; }
 
         public double ProQty
         {

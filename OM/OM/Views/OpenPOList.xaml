@@ -9,18 +9,30 @@
             <StackLayout.Padding>
                 <OnPlatform x:TypeArguments="Thickness" 
                             Android="30, 10, 30, 0" 
-                            WinPhone="30, 10, 30, 0" 
                             iOS="30, 10, 30, 0"/>
             </StackLayout.Padding>
 
         <SearchBar x:Name="po_search" Placeholder="Search" TextColor="White" BackgroundColor="Transparent"/>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="ORDER REFERENCE" TextColor="White" FontSize="Small" TextDecorations="Underline" />
+                <Label Grid.Row="0" Text="ORDER DATE" TextColor="White" FontSize="Small" TextDecorations="Underline" HorizontalTextAlignment="End" />
+            </Grid>
 
         <ListView x:Name="PurchaseOrdersListView" BackgroundColor="Transparent">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Grid>
-                            <Label Grid.Row="0" Text="{Binding OrderRef}" TextColor="White" FontSize="Small" />
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="{Binding OrderRef}" TextColor="White" FontSize="Small" />
+                            <Label Grid.Row="0" Text="{Binding DateOrdered}" TextColor="White" FontSize="Small" HorizontalTextAlignment="End" />
                             <Label Grid.Row="1" Text="{Binding Status}" TextColor="LightGray" FontSize="Small" />
                             <Label Grid.Row="1" Text="{Binding OrderValue}" TextColor="LightGray" HorizontalTextAlignment="End" FontSize="Small" />
                         </Grid>

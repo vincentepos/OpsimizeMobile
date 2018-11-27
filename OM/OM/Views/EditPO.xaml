@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OM.Views.NewPOView"
-             Title="Purchase Order Summary">
+             x:Class="OM.Views.EditPO"
+             Title="Edit Purchase Order">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout.Padding>
@@ -47,7 +47,7 @@
                                 <Label Grid.Row="0" Text="Name:" TextColor="White" FontSize="Small" VerticalOptions="Center" />
                                 <Label Grid.Row="1" Text="Order Size:" TextColor="White" FontSize="Small" VerticalOptions="Center" LineBreakMode="WordWrap" />
                                 <Label Grid.Row="2" Text="Quantity:" TextColor="White" FontSize="Small" VerticalOptions="Center" />
-                                <Label Grid.Row="0" Text="{Binding Name}" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="End"/>
+                                <Label Grid.Row="0" Text="{Binding Description}" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="End"/>
                                 <Label Grid.Row="1" Text="{Binding OrderSize}" TextColor="White" FontSize="Small" VerticalOptions="Center" LineBreakMode="WordWrap" HorizontalOptions="End"/>
                                 <Entry Grid.Row="2" x:Name="PROQTY" Text="{Binding Qty}" TextColor="Black" FontSize="Small" VerticalOptions="Center" BackgroundColor="White" HorizontalOptions="End" TextChanged="QtyChange" />
                             </Grid>
@@ -60,7 +60,15 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Button Text="Save Purchase Order" Clicked="SaveProductsProcedure" BackgroundColor="Silver" TextColor="Black"/>
+                <Button Text="Add Products" Clicked="AddProductsProcedure" BackgroundColor="Silver" TextColor="Black"/>
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Text="Save" Clicked="SavePOProcedure" BackgroundColor="Silver" TextColor="Black"/>
+                <Button Grid.Column="1" Text="Send" Clicked="SendPOProcedure" BackgroundColor="Silver" TextColor="Black"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>
