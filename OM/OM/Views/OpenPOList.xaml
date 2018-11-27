@@ -27,12 +27,12 @@
                 <DataTemplate>
                     <ViewCell>
                         <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Text="{Binding OrderRef}" TextColor="White" FontSize="Small" />
-                            <Label Grid.Row="0" Text="{Binding DateOrdered}" TextColor="White" FontSize="Small" HorizontalTextAlignment="End" />
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="{Binding OrderRef}" TextColor="White" FontSize="Small" />
+                            <Label Grid.Row="0" Text="{Binding DateOrdered, StringFormat='\{0:dd/MM/yyyy HH:mm}'}" TextColor="White" FontSize="Small" HorizontalTextAlignment="End" />
                             <Label Grid.Row="1" Text="{Binding Status}" TextColor="LightGray" FontSize="Small" />
                             <Label Grid.Row="1" Text="{Binding OrderValue}" TextColor="LightGray" HorizontalTextAlignment="End" FontSize="Small" />
                         </Grid>

@@ -61,7 +61,7 @@ namespace OM.Views
 
             POLineSumListView.ItemsSource = Items;
 
-            DeliveryDateText.Text = _OrderDeliveryDate.ToString();
+            DeliveryDateText.Text = _OrderDeliveryDate.ToString("dd/MM/yyyy HH:mm");
             OrderRefText.Text = _OrderReference;
             OrderedByText.Text = _OrderBy;
             OrderForText.Text = _OrderFor;

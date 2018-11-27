@@ -63,7 +63,7 @@ namespace OM.Views
             StatusText.TextColor = Constants.MainTextColor;
             OrderValueText.TextColor = Constants.MainTextColor;
 
-            DeliveryDateText.Text = _OrderDeliveryDate.ToString();
+            DeliveryDateText.Text = _OrderDeliveryDate.ToString("dd/MM/yyyy HH:mm");
             OrderRefText.Text = _OrderReference;
             OrderedByText.Text = _OrderBy;
             OrderForText.Text = _OrderFor;

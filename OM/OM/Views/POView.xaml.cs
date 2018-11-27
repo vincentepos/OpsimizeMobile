@@ -45,7 +45,7 @@ namespace OM.Views
 
         void PopulatePOView(Item item)
         {
-            DateOrderedText.Text = item.DateOrdered.ToString();
+            DateOrderedText.Text = item.DateOrdered.ToString("dd/MM/yyyy HH:mm");
             OrderRefText.Text = item.OrderRef;
             LocationText.Text = item.Location;
             OrderValueText.Text = item.OrderValue.ToString();
