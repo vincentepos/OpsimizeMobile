@@ -58,12 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl">
-      <Version>1.5.166-beta</Version>
+      <Version>1.5.231</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.840541-pre1" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2.1" />
