@@ -35,11 +35,11 @@ namespace OM.Views
                 var poresult = await App.RestServicePO.GetPO(user2, po);
                 if (poresult.OrderRef != null)
                 {
-                    DisplayAlert("Search", "Searched", "Ok");
+                    await DisplayAlert("Search", "Searched", "Ok");
                 }
                 else
                 {
-                    DisplayAlert("Search", "Search can not be empty", "Ok");
+                    await DisplayAlert("Search", "Search can not be empty", "Ok");
                 }
             }
         }

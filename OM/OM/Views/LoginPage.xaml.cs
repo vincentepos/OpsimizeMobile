@@ -60,11 +60,11 @@ namespace OM.Views
                 {
                     await DisplayAlert("Login", "Login Success", "Ok");
 
-                    if (Device.OS == TargetPlatform.Android)
+                    if (Device.RuntimePlatform == Device.Android)
                     {
                         Application.Current.MainPage = new NavigationPage(new Dashboard(user));
                     }
-                    else if (Device.OS == TargetPlatform.iOS)
+                    else if (Device.RuntimePlatform == Device.iOS)
                     {
                         await Navigation.PushModalAsync(new NavigationPage(new Dashboard(user)));
                     }
