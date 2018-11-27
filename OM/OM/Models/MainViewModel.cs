@@ -1,10 +1,20 @@
 ﻿using System;
+using System.ComponentModel;
+
 namespace OM.Models
 {
-    public class MainViewModel
+    internal class MainViewModel : INotifyPropertyChanged
     {
-        public MainViewModel()
+        private string _conn;
+
+        public string Conn 
         {
+            get => _conn;
+            set 
+            {
+                _conn = value;
+                OnPropertyChanged();
+            }
         }
     }
 }
