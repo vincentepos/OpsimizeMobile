@@ -70,7 +70,7 @@ namespace OM.Views
                 po = JsonConvert.DeserializeObject<PO>(poJson);
             }
             OrderRefText.Text = po.OrderRef;
-            DeliveryDateText.Text = po.DeliveryDate.ToString();
+            DeliveryDateText.Text = po.DeliveryDate.ToString("dd/MM/yyyy HH:mm");
             OrderedByText.Text = po.User;
             StatusText.Text = po.Status;
             OrderForText.Text = po.OrderFor;

@@ -12,7 +12,7 @@
                             iOS="30, 10, 30, 0"/>
             </StackLayout.Padding>
 
-        <SearchBar x:Name="po_search" Placeholder="Search" TextColor="White" />
+        <SearchBar x:Name="po_search" Placeholder="Search" TextColor="Black" />
 
             <Grid>
                 <Grid.RowDefinitions>
