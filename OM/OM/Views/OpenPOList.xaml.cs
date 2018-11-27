@@ -34,6 +34,7 @@ namespace OM.Views
         void Init()
         {
             BackgroundColor = Constants.BackgroundColor;
+            po_search.BackgroundColor = Constants.BackgroundColor;
         }
 
         public async void GetPO()
@@ -54,9 +55,11 @@ namespace OM.Views
             {
                 ObjPOList = JsonConvert.DeserializeObject<PurchaseOrders>(poJson);
             }
-            PurchaseOrdersListView.ItemsSource = ObjPOList.Items;
-            PurchaseOrdersListView.ItemTapped += PurchaseOrdersListView_ItemTapped;
             Items = ObjPOList.Items;
+            var sorted = Items.OrderByDescending(x => x.DateOrdered).ToList();
+            PurchaseOrdersListView.ItemsSource = sorted;
+            PurchaseOrdersListView.ItemTapped += PurchaseOrdersListView_ItemTapped;
+            
             //var po = JsonConvert.DeserializeObject<Dictionary<object, List<PurchaseOrders>>>(response);
             //Console.WriteLine("Log List" + po);
             //PurchaseOrdersListView.ItemsSource = po;
@@ -69,7 +72,7 @@ namespace OM.Views
 
             if(item.Status == "Draft PO")
             {
-                Navigation.PushAsync(new EditPO(username, password, item.OrderRef, item.Status,item.Location, item.User, item.DateOrdered, item.SiteID));
+                Navigation.PushAsync(new EditPO(username, password, item.OrderRef, item.Status,item.Location, item.User, item.DateOrdered, item.SiteID, item.OrderValue));
             }
             else
             {

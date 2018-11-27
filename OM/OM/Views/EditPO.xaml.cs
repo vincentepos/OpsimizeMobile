@@ -24,6 +24,7 @@ namespace OM.Views
         public string _OrderFor;
         public string _OrderBy;
         public DateTime _OrderDeliveryDate;
+        public double _OrderValue;
         public List<Line> LineList = new List<Line>();
         public List<ProductLine> PROItems = new List<ProductLine>();
         public long _Site;
@@ -31,7 +32,7 @@ namespace OM.Views
         public string qty;
         public User user = new User();
 
-        public EditPO (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, long SiteID)
+        public EditPO (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, long SiteID, double OrderValue)
 		{
             username = un;
             password = pw;
@@ -43,6 +44,7 @@ namespace OM.Views
             _OrderBy = OrderBy;
             _OrderDeliveryDate = DeliveryDate;
             _Site = SiteID;
+            _OrderValue = OrderValue;
             SiteUpdate.PORef = OrderRef;
             SiteUpdate.SiteID = SiteID;
             InitializeComponent ();
@@ -59,12 +61,14 @@ namespace OM.Views
             OrderedByText.TextColor = Constants.MainTextColor;
             OrderForText.TextColor = Constants.MainTextColor;
             StatusText.TextColor = Constants.MainTextColor;
+            OrderValueText.TextColor = Constants.MainTextColor;
 
             DeliveryDateText.Text = _OrderDeliveryDate.ToString();
             OrderRefText.Text = _OrderReference;
             OrderedByText.Text = _OrderBy;
             OrderForText.Text = _OrderFor;
             StatusText.Text = _OrderStatus;
+            OrderValueText.Text = _OrderValue.ToString();
         }
 
         public async void EditPOView()
