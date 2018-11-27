@@ -10,8 +10,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -28,8 +26,6 @@
 	<string>com.companyname.OM</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>CFBundleName</key>
-	<string>OM</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>XSLaunchImageAssets</key>
@@ -38,5 +34,11 @@
 	<string>LaunchScreen</string>
 	<key>Bundel Version</key>
 	<string>1.0</string>
+	<key>CFBundleName</key>
+	<string>Opsimize Mobile App</string>
+	<key>CFBundleShortVersionString</key>
+	<string>V1.2</string>
+	<key>CFBundleVersion</key>
+	<string>5</string>
 </dict>
 </plist>
