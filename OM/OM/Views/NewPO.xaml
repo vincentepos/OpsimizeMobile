@@ -31,8 +31,8 @@
                 <Label Grid.Row="4" Text="Order For:" TextColor="White" />
                 <Label Grid.Row="4" x:Name="OrderForText" HorizontalTextAlignment="End" FontSize="Small" />
                 <Label Grid.Row="5" Text="Site:" TextColor="White" VerticalOptions="Center" />
-                <Picker Grid.Row="5" x:Name="SitePicker" Title="Select Site" ItemsSource="{Binding Sites}" ItemDisplayBinding="{Binding SiteName}" SelectedItem="{Binding SelectedSite}"  FontSize="Small" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="End" />
-                <Label Grid.Row="6" x:Name="SiteIDText" Text="{Binding SelectedSite.SiteID}" FontSize="Small" TextColor="Transparent" />
+                <Picker Grid.Row="5" x:Name="SitePicker" Title="Select Site" ItemsSource="{Binding Sites}" ItemDisplayBinding="{Binding SiteName}" SelectedItem="{Binding SelSite}"  FontSize="Small" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="End" />
+                <Label Grid.Row="6" x:Name="SiteIDText" Text="{Binding SelSite.SiteID}" FontSize="Small" TextColor="Transparent" />
             </Grid>
 
             <Grid>

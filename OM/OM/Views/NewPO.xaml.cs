@@ -17,7 +17,7 @@ namespace OM.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewPO : ContentPage
 	{
-        public List<Site> SiteList = new List<Site>();
+        public List<POSite> SiteList = new List<POSite>();
         public List<ProductLine> POProducts = new List<ProductLine>();
         public POProducts POProductsList = new POProducts();
         public string username;
@@ -38,9 +38,9 @@ namespace OM.Views
             password = pw;
             InitializeComponent ();
             Init();
-            GetSiteList();
+            //GetSiteList();
             GetNewPO();
-            BindingContext = new Site();
+            BindingContext = new POSite();
         }
 
         void Init()
@@ -69,12 +69,15 @@ namespace OM.Views
             {
                 po = JsonConvert.DeserializeObject<PO>(poJson);
             }
+            SiteList = po.SiteList;
+            SitePicker.ItemsSource = po.SiteList;
+            Console.WriteLine("Site: " + SiteIDText.Text);
             OrderRefText.Text = po.OrderRef;
             DeliveryDateText.Text = po.DeliveryDate.ToString("dd/MM/yyyy HH:mm");
             OrderedByText.Text = po.User;
             StatusText.Text = po.Status;
             OrderForText.Text = po.OrderFor;
-            SiteUpdate.PORef = po.OrderRef;
+            
             POProductsList.OrderRef = po.OrderRef;
             OrderRef = po.OrderRef;
             _OrderBy = po.User;
@@ -82,32 +85,30 @@ namespace OM.Views
             _OrderFor = po.OrderFor;
             _OrderStatus = po.Status;
             
-
-            //PO result = JsonConvert.DeserializeObject<PO>(response);
         }
 
-        public async void GetSiteList()
-        {
-            var client = new HttpClient();
-            client.MaxResponseContentBufferSize = 256000;
-            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
-            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
-            var response = await client.GetAsync(Constants.POSitesUrl);
-            Console.WriteLine("Site Response: " + response);
-            var siteJson = await response.Content.ReadAsStringAsync();
-            Sites ObjSiteList = new Sites();
-            if (siteJson != "")
-            {
-                ObjSiteList = JsonConvert.DeserializeObject<Sites>(siteJson);
-            }
-            SitePicker.ItemsSource = ObjSiteList.AllSites;
-            SiteList = ObjSiteList.AllSites;
-            Console.WriteLine("Site: " + SiteIDText.Text);
+        //public async void GetSiteList()
+        //{
+        //    var client = new HttpClient();
+        //    client.MaxResponseContentBufferSize = 256000;
+        //    client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+        //    client.DefaultRequestHeaders.Add("Accept", "application/json");
+        //    string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+        //    client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+        //    var response = await client.GetAsync(Constants.POSitesUrl);
+        //    Console.WriteLine("Site Response: " + response);
+        //    var siteJson = await response.Content.ReadAsStringAsync();
+        //    Sites ObjSiteList = new Sites();
+        //    if (siteJson != "")
+        //    {
+        //        ObjSiteList = JsonConvert.DeserializeObject<Sites>(siteJson);
+        //    }
+        //    SitePicker.ItemsSource = ObjSiteList.AllSites;
+        //    SiteList = ObjSiteList.AllSites;
+        //    Console.WriteLine("Site: " + SiteIDText.Text);
             
 
-        }
+        //}
 
         async void AddProductsProcedure(object sender, EventArgs e)
         {
@@ -115,6 +116,7 @@ namespace OM.Views
             {
                 Console.WriteLine("Site: " + SiteIDText.Text);
                 siteid = SiteIDText.Text;
+                SiteUpdate.PORef = OrderRef;
                 SiteUpdate.SiteID = Convert.ToInt64(siteid);
                 _Site = SiteUpdate.SiteID;
                 var client = new HttpClient();
@@ -131,7 +133,7 @@ namespace OM.Views
                 var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
                 Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
 
-                Console.WriteLine("Pass Items: " + OrderRef + " " + _OrderStatus + " " + _OrderFor + " " + _OrderBy);
+                Console.WriteLine("Pass Items: " + OrderRef + " " + _OrderStatus + " " + _OrderFor + " " + _OrderBy + " " + _Site);
                 await Navigation.PushAsync(new NewPOLines(username, password, OrderRef, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, _Site));
             }
             else
