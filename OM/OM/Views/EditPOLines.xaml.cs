@@ -62,7 +62,7 @@ namespace OM.Views
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
             client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
-            var response = await client.GetAsync(Constants.POProductsUrl);
+            var response = await client.GetAsync(Constants.POProductsUrl + "?PORef=" + _OrderReference);
 
             var productJson = await response.Content.ReadAsStringAsync();
             POProducts ObjProductList = new POProducts();
