@@ -108,7 +108,15 @@ namespace OM.Views
 
         async void AddProductsDoneProcedure(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EditPOView(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, PROItems, _Site));
+            if (PROItems != null)
+            {
+                await Navigation.PushAsync(new EditPOView(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, PROItems, _Site));
+            }
+            else
+            {
+                await DisplayAlert("Alert", "No Products Selected", "Ok");
+            }
+            
         }
     }
 }

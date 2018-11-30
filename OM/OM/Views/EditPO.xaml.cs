@@ -109,77 +109,108 @@ namespace OM.Views
             Console.WriteLine("value of: " + qty);
         }
 
-        public void OnDelete(object sender, EventArgs e)
+        async public void OnDelete(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);
             Line dataItem = (Line)mi.CommandParameter;
-            YourCollection.Remove(dataItem);
-            DisplayAlert("Item Removed", dataItem.Description + " removed", "Ok");
 
+            //----Call Delete PO Line API here ----// "?POLineRef="
+            var client = new HttpClient();
+            client.MaxResponseContentBufferSize = 256000;
+            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+            var response = await client.GetStringAsync(Constants.POLineFromIDUrl + "?POLineRef=" + dataItem.POLineID);
+            GeneralResponse result = JsonConvert.DeserializeObject<GeneralResponse>(response);
+            if (result.Response == true)
+            {
+                YourCollection.Remove(dataItem);
+                await DisplayAlert("Item Removed", dataItem.Description + " removed", "Ok");
+            }
+            else
+            {
+                await DisplayAlert("Item Not Removed", result.Message, "Ok");
+            }
+
+            
         }
 
         async void SavePOProcedure(object sender, EventArgs e)
         {
-            POLines PostPOLines = new POLines();
-            PostPOLines.Lines = LineList;
-            PostPOLines.SiteID = _Site;
-            PostPOLines.OrderRef = _OrderReference;
-
-            var client = new HttpClient();
-            client.MaxResponseContentBufferSize = 256000;
-            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
-            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
-            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
-
-            var jstring = JsonConvert.SerializeObject(PostPOLines);
-            var content = new StringContent(jstring, Encoding.UTF8, "application/json");
-            var response = client.PostAsync(Constants.SavePOUrl, content).Result;
-            var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
-            Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
-
-            if (result.Response == true)
+            if (LineList != null)
             {
-                App.Current.MainPage = new NavigationPage(new Dashboard(user));
-                await DisplayAlert("Successful", "Purchase Order Successfully Saved", "Ok");
+                POLines PostPOLines = new POLines();
+                PostPOLines.Lines = LineList;
+                PostPOLines.SiteID = _Site;
+                PostPOLines.OrderRef = _OrderReference;
+
+                var client = new HttpClient();
+                client.MaxResponseContentBufferSize = 256000;
+                client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+                client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+
+                var jstring = JsonConvert.SerializeObject(PostPOLines);
+                var content = new StringContent(jstring, Encoding.UTF8, "application/json");
+                var response = client.PostAsync(Constants.SavePOUrl, content).Result;
+                var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
+                Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
+
+                if (result.Response == true)
+                {
+                    App.Current.MainPage = new NavigationPage(new Dashboard(user));
+                    await DisplayAlert("Successful", "Purchase Order Successfully Saved", "Ok");
+                }
+                else
+                {
+                    await DisplayAlert("Save Failed", result.Message, "Ok");
+                }
             }
             else
             {
-                await DisplayAlert("Save Failed", result.Message, "Ok");
+                await DisplayAlert("Alert", "Can not save as there are no Products", "Ok");
             }
-
         }
 
         async void SendPOProcedure(object sender, EventArgs e)
         {
-            POLines PostPOLines = new POLines();
-            PostPOLines.Lines = LineList;
-            PostPOLines.SiteID = _Site;
-            PostPOLines.OrderRef = _OrderReference;
-
-            var client = new HttpClient();
-            client.MaxResponseContentBufferSize = 256000;
-            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
-            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
-            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
-
-            var jstring = JsonConvert.SerializeObject(PostPOLines);
-            var content = new StringContent(jstring, Encoding.UTF8, "application/json");
-            var response = client.PostAsync(Constants.SendPOUrl, content).Result;
-            var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
-            Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
-
-            if (result.Response == true)
+            if (LineList != null)
             {
-                App.Current.MainPage = new NavigationPage(new Dashboard(user));
-                await DisplayAlert("Successful", "Purchase Order Successfully Send", "Ok");
+                POLines PostPOLines = new POLines();
+                PostPOLines.Lines = LineList;
+                PostPOLines.SiteID = _Site;
+                PostPOLines.OrderRef = _OrderReference;
+
+                var client = new HttpClient();
+                client.MaxResponseContentBufferSize = 256000;
+                client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+                client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+
+                var jstring = JsonConvert.SerializeObject(PostPOLines);
+                var content = new StringContent(jstring, Encoding.UTF8, "application/json");
+                var response = client.PostAsync(Constants.SendPOUrl, content).Result;
+                var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
+                Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
+
+                if (result.Response == true)
+                {
+                    App.Current.MainPage = new NavigationPage(new Dashboard(user));
+                    await DisplayAlert("Successful", "Purchase Order Successfully Send", "Ok");
+                }
+                else
+                {
+                    await DisplayAlert("Send Failed", result.Message, "Ok");
+                }
             }
             else
             {
-                await DisplayAlert("Send Failed", result.Message, "Ok");
+                await DisplayAlert("Alert", "Can not send as there are no Products", "Ok");
             }
         }
     }

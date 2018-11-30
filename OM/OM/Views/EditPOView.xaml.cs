@@ -90,60 +90,74 @@ namespace OM.Views
 
         async void SaveProductsProcedure(object sender, EventArgs e)
         {
-            POProductsList.Lines = Items;
-            POProductsList.SiteID = _Site;
-            Console.WriteLine("Root Order Ref End: " + POProductsList.OrderRef);
-            var client = new HttpClient();
-            client.MaxResponseContentBufferSize = 256000;
-            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
-            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
-            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
-
-            var jstring = JsonConvert.SerializeObject(POProductsList);
-            var content = new StringContent(jstring, Encoding.UTF8, "application/json");
-            var response = client.PostAsync(Constants.POLinesPostUrl, content).Result;
-            var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
-            Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
-
-            if (result.Response == true)
+            if (Items != null)
             {
-                await DisplayAlert("Successful", "Purchase Order(s) Successfully Created", "Ok");
+                POProductsList.Lines = Items;
+                POProductsList.SiteID = _Site;
+                Console.WriteLine("Root Order Ref End: " + POProductsList.OrderRef);
+                var client = new HttpClient();
+                client.MaxResponseContentBufferSize = 256000;
+                client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+                client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+
+                var jstring = JsonConvert.SerializeObject(POProductsList);
+                var content = new StringContent(jstring, Encoding.UTF8, "application/json");
+                var response = client.PostAsync(Constants.POLinesPostUrl, content).Result;
+                var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
+                Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
+
+                if (result.Response == true)
+                {
+                    await DisplayAlert("Successful", "Purchase Order(s) Successfully Created", "Ok");
+                }
+                else
+                {
+                    await DisplayAlert("Not Uploaded", result.Message, "Ok");
+                }
             }
             else
             {
-                await DisplayAlert("Not Uploaded", result.Message, "Ok");
+                await DisplayAlert("Alert", "Can not save as there are no Products", "Ok");
             }
         }
 
         async void SendProductsProcedure(object sender, EventArgs e)
         {
-            POProductsList.Lines = Items;
-            POProductsList.SiteID = _Site;
-            Console.WriteLine("Root Order Ref End: " + POProductsList.OrderRef);
-            var client = new HttpClient();
-            client.MaxResponseContentBufferSize = 256000;
-            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
-            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
-            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
-
-            var jstring = JsonConvert.SerializeObject(POProductsList);
-            var content = new StringContent(jstring, Encoding.UTF8, "application/json");
-            var response = client.PostAsync(Constants.POLinesPostSendUrl, content).Result;
-            var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
-            Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
-
-            if (result.Response == true)
+            if (Items != null)
             {
-                App.Current.MainPage = new NavigationPage(new Dashboard(user));
-                await DisplayAlert("Successful", "Purchase Order(s) Successfully Created", "Ok");
+                POProductsList.Lines = Items;
+                POProductsList.SiteID = _Site;
+                Console.WriteLine("Root Order Ref End: " + POProductsList.OrderRef);
+                var client = new HttpClient();
+                client.MaxResponseContentBufferSize = 256000;
+                client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+                client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+
+                var jstring = JsonConvert.SerializeObject(POProductsList);
+                var content = new StringContent(jstring, Encoding.UTF8, "application/json");
+                var response = client.PostAsync(Constants.POLinesPostSendUrl, content).Result;
+                var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
+                Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
+
+                if (result.Response == true)
+                {
+                    App.Current.MainPage = new NavigationPage(new Dashboard(user));
+                    await DisplayAlert("Successful", "Purchase Order(s) Successfully Created", "Ok");
+                }
+                else
+                {
+                    await DisplayAlert("Not Uploaded", result.Message, "Ok");
+                }
             }
             else
             {
-                await DisplayAlert("Not Uploaded", result.Message, "Ok");
+                await DisplayAlert("Alert", "Can not send as there are no Products", "Ok");
             }
         }
     }
