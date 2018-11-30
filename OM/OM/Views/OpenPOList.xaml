@@ -22,7 +22,7 @@
                 <Label Grid.Row="0" Text="ORDER DATE" TextColor="White" FontSize="Small" TextDecorations="Underline" HorizontalTextAlignment="End" />
             </Grid>
 
-        <ListView x:Name="PurchaseOrdersListView" BackgroundColor="Transparent">
+        <ListView x:Name="PurchaseOrdersListView" BackgroundColor="Transparent" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

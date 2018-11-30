@@ -64,5 +64,8 @@ namespace OM.Models
 
         //-------------Send PO---------------//
         public static string SavePOUrl = BaseURL + "PurchaceOrder/SavePO";
+
+        //-------------Get OrderSizes---------------//
+        public static string GetOrderSizesUrl = BaseURL + "PurchaceOrder/OrderSizes";
     }
 }

@@ -96,7 +96,7 @@ namespace OM.Views
             }
             else
             {
-                PurchaseOrdersListView.ItemsSource = Items.Where(X => X.OrderRef.ToLower().Contains(filter.ToLower()));
+                PurchaseOrdersListView.ItemsSource = Items.Where(X => (X.OrderRef.ToLower().Contains(filter.ToLower()) || X.Supplier.ToLower().Contains(filter.ToLower()) || X.Status.ToLower().Contains(filter.ToLower())));
             }
             PurchaseOrdersListView.EndRefresh();
         }

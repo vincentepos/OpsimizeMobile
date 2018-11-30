@@ -3,6 +3,7 @@ using OM.Data;
 using OM.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,6 +18,7 @@ namespace OM.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EditPO : ContentPage
 	{
+        public ObservableCollection<Line> YourCollection { get; set; }
         public string username;
         public string password;
         public string _OrderReference;
@@ -87,7 +89,8 @@ namespace OM.Views
             {
                 ObjPOList = JsonConvert.DeserializeObject<POLines>(poJson);
             }
-            POLineSumListView.ItemsSource = ObjPOList.Lines;
+            YourCollection = new ObservableCollection<Line>(ObjPOList.Lines);
+            POLineSumListView.ItemsSource = YourCollection;
             LineList = ObjPOList.Lines;
             foreach (var item in LineList)
             {
@@ -104,6 +107,15 @@ namespace OM.Views
         {
             qty = e.NewTextValue;
             Console.WriteLine("value of: " + qty);
+        }
+
+        public void OnDelete(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+            Line dataItem = (Line)mi.CommandParameter;
+            YourCollection.Remove(dataItem);
+            DisplayAlert("Item Removed", dataItem.Description + " removed", "Ok");
+
         }
 
         async void SavePOProcedure(object sender, EventArgs e)

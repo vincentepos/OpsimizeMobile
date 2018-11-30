@@ -3,6 +3,7 @@ using OM.Data;
 using OM.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,6 +18,7 @@ namespace OM.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewPOView : ContentPage
 	{
+        public ObservableCollection<ProductLine> YourCollection { get; set; }
         public POProducts POProductsList = new POProducts();
         public List<ProductLine> Items = new List<ProductLine>();
         public User user = new User();
@@ -29,6 +31,7 @@ namespace OM.Views
         public DateTime _OrderDeliveryDate;
         public string qty;
         public long _Site;
+
 
         public NewPOView (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, List<ProductLine> Products, long SiteID)
 		{
@@ -48,9 +51,10 @@ namespace OM.Views
             InitializeComponent ();
             Init();
             BindingContext = new ProductLine();
+
         }
 
-        void Init()
+        async void Init()
         {
             BackgroundColor = Constants.BackgroundColor;
             DeliveryDateText.TextColor = Constants.MainTextColor;
@@ -58,22 +62,52 @@ namespace OM.Views
             OrderedByText.TextColor = Constants.MainTextColor;
             OrderForText.TextColor = Constants.MainTextColor;
             StatusText.TextColor = Constants.MainTextColor;
-
-            POLineSumListView.ItemsSource = Items;
+            YourCollection = new ObservableCollection<ProductLine>(Items);
+            POLineSumListView.ItemsSource = YourCollection;
 
             DeliveryDateText.Text = _OrderDeliveryDate.ToString("dd/MM/yyyy HH:mm");
             OrderRefText.Text = _OrderReference;
             OrderedByText.Text = _OrderBy;
             OrderForText.Text = _OrderFor;
             StatusText.Text = _OrderStatus;
+
             
 
+            foreach (var item in Items)
+            {
+                //PROItems.Add(new ProductLine { Code = item.Code, Name = item.Description, Supplier = item.Supplier, ProductID = Convert.ToInt16(item.ProductID), OrderSize = item.OrderSize, Qty = item.Qty });
+                long ProID = Convert.ToInt16(item.ProductID);
+
+                var client = new HttpClient();
+                client.MaxResponseContentBufferSize = 256000;
+                client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+                var response = await client.GetAsync(Constants.GetOrderSizesUrl + "?ProductID=" + ProID);
+
+                var osJson = await response.Content.ReadAsStringAsync();
+                OrderSize ObjOSList = new OrderSize();
+                if (osJson != "")
+                {
+                    ObjOSList = JsonConvert.DeserializeObject<OrderSize>(osJson);
+                }
+            }
         }
 
         void QtyChange(object sender, TextChangedEventArgs e)
         {
             qty = e.NewTextValue;
             Console.WriteLine("value of: " + qty);
+        }
+
+        public void OnDelete(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+            ProductLine dataItem = (ProductLine)mi.CommandParameter;
+            YourCollection.Remove(dataItem);
+            DisplayAlert("Item Removed", dataItem.Name + " removed", "Ok");
+
         }
 
         async void SaveProductsProcedure(object sender, EventArgs e)

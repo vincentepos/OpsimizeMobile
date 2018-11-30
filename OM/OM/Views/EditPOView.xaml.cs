@@ -3,6 +3,7 @@ using OM.Data;
 using OM.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,6 +18,7 @@ namespace OM.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EditPOView : ContentPage
 	{
+        public ObservableCollection<ProductLine> YourCollection { get; set; }
         public POProducts POProductsList = new POProducts();
         public List<ProductLine> Items = new List<ProductLine>();
         public User user = new User();
@@ -59,7 +61,8 @@ namespace OM.Views
             OrderForText.TextColor = Constants.MainTextColor;
             StatusText.TextColor = Constants.MainTextColor;
 
-            POLineSumListView.ItemsSource = Items;
+            YourCollection = new ObservableCollection<ProductLine>(Items);
+            POLineSumListView.ItemsSource = YourCollection;
 
             DeliveryDateText.Text = _OrderDeliveryDate.ToString("dd/MM/yyyy HH:mm");
             OrderRefText.Text = _OrderReference;
@@ -74,6 +77,15 @@ namespace OM.Views
         {
             qty = e.NewTextValue;
             Console.WriteLine("value of: " + qty);
+        }
+
+        public void OnDelete(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+            ProductLine dataItem = (ProductLine)mi.CommandParameter;
+            YourCollection.Remove(dataItem);
+            DisplayAlert("Item Removed", dataItem.Name + " removed", "Ok");
+
         }
 
         async void SaveProductsProcedure(object sender, EventArgs e)

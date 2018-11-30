@@ -19,19 +19,22 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
-                <Label Grid.Row="0" Text="Order Ref:" TextColor="White" />
-                <Label Grid.Row="0" x:Name="OrderRefText" HorizontalTextAlignment="End" FontSize="Small" />
-                <Label Grid.Row="1" Text="Delivery Date:" TextColor="White" />
-                <Label Grid.Row="1" x:Name="DeliveryDateText" HorizontalTextAlignment="End" FontSize="Small" />
-                <Label Grid.Row="2" Text="Ordered By:" TextColor="White" />
-                <Label Grid.Row="2" x:Name="OrderedByText" HorizontalTextAlignment="End" FontSize="Small" />
-                <Label Grid.Row="3" Text="Status:" TextColor="White" />
-                <Label Grid.Row="3" x:Name="StatusText" HorizontalTextAlignment="End" FontSize="Small" />
-                <Label Grid.Row="4" Text="Order For:" TextColor="White" />
-                <Label Grid.Row="4" x:Name="OrderForText" HorizontalTextAlignment="End" FontSize="Small" />
-                <Label Grid.Row="5" Text="Site:" TextColor="White" VerticalOptions="Center" />
-                <Picker Grid.Row="5" x:Name="SitePicker" Title="Select Site" ItemsSource="{Binding Sites}" ItemDisplayBinding="{Binding SiteName}" SelectedItem="{Binding SelSite}"  FontSize="Small" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="End" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Text="Order Ref:" TextColor="White" />
+                <Label Grid.Row="0" Grid.Column="1" x:Name="OrderRefText" FontSize="Small" HorizontalTextAlignment="End" />
+                <Label Grid.Row="1" Grid.Column="0" Text="Delivery Date:" TextColor="White" />
+                <Label Grid.Row="1" Grid.Column="1" x:Name="DeliveryDateText" FontSize="Small" HorizontalTextAlignment="End" />
+                <Label Grid.Row="2" Grid.Column="0" Text="Ordered By:" TextColor="White" />
+                <Label Grid.Row="2" Grid.Column="1" x:Name="OrderedByText" FontSize="Small" HorizontalTextAlignment="End" />
+                <Label Grid.Row="3" Grid.Column="0" Text="Status:" TextColor="White" />
+                <Label Grid.Row="3" Grid.Column="1" x:Name="StatusText" FontSize="Small" HorizontalTextAlignment="End" />
+                <Label Grid.Row="4" Grid.Column="0" Text="Order For:" TextColor="White" />
+                <Label Grid.Row="4" Grid.Column="1" x:Name="OrderForText" FontSize="Small" HorizontalTextAlignment="End" />
+                <Label Grid.Row="5" Grid.Column="0" Text="Site:" TextColor="White" VerticalOptions="Center" />
+                <Picker Grid.Row="5" Grid.Column="1" x:Name="SitePicker" Title="Select Site" ItemsSource="{Binding Sites}" ItemDisplayBinding="{Binding SiteName}" SelectedItem="{Binding SelSite}"  FontSize="Small" TextColor="White" BackgroundColor="Transparent" />
                 <Label Grid.Row="6" x:Name="SiteIDText" Text="{Binding SelSite.SiteID}" FontSize="Small" TextColor="Transparent" />
             </Grid>
 

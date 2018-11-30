@@ -3,6 +3,7 @@ using OM.Data;
 using OM.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,6 +18,7 @@ namespace OM.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EditPOLines : ContentPage
 	{
+        public ObservableCollection<ProductLine> YourCollection { get; set; }
         public List<ProductLine> Items = new List<ProductLine>();
         public List<ProductLine> PROItems = new List<ProductLine>();
         public string username;
@@ -68,7 +70,8 @@ namespace OM.Views
             {
                 ObjProductList = JsonConvert.DeserializeObject<POProducts>(productJson);
             }
-            POLineListView.ItemsSource = ObjProductList.Lines;
+            YourCollection = new ObservableCollection<ProductLine>(ObjProductList.Lines);
+            POLineListView.ItemsSource = YourCollection;
             Items = ObjProductList.Lines;
             //Switcher.Toggled += switcher_Toggled;
         }
@@ -99,6 +102,7 @@ namespace OM.Views
             Items.Add(new ProductLine { Code = dataItem.Code, Name = dataItem.Name, Supplier = dataItem.Supplier, ProductID = dataItem.ProductID, OrderSize = dataItem.OrderSize });
             PROItems.Add(new ProductLine { Code = dataItem.Code, Name = dataItem.Name, Supplier = dataItem.Supplier, ProductID = dataItem.ProductID, OrderSize = dataItem.OrderSize });
             Console.WriteLine("Item Added :" + PROItems);
+            YourCollection.Remove(dataItem);
             DisplayAlert("Item Added", dataItem.Name + " added to Purchase Order", "Ok");
         }
 

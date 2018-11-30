@@ -38,18 +38,22 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Remove" IsDestructive="True" />
+                            </ViewCell.ContextActions>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Text="Name:" TextColor="White" FontSize="Small" VerticalOptions="Center" />
-                                <Label Grid.Row="1" Text="Order Size:" TextColor="White" FontSize="Small" VerticalOptions="Center" LineBreakMode="WordWrap" />
-                                <Label Grid.Row="2" Text="Quantity:" TextColor="White" FontSize="Small" VerticalOptions="Center" />
-                                <Label Grid.Row="0" Text="{Binding Name}" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="End"/>
-                                <Label Grid.Row="1" Text="{Binding OrderSize}" TextColor="White" FontSize="Small" VerticalOptions="Center" LineBreakMode="WordWrap" HorizontalOptions="End"/>
-                                <Entry Grid.Row="2" x:Name="PROQTY" Text="{Binding Qty}" TextColor="Black" FontSize="Small" VerticalOptions="Center" BackgroundColor="White" HorizontalOptions="End" TextChanged="QtyChange" />
+                                <Label Grid.Row="0" Grid.Column="0" Text="Name:" TextColor="White" FontSize="Small" VerticalOptions="Center" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="End"/>
+                                <Label Grid.Row="1" Grid.Column="0" Text="Order Size:" TextColor="White" FontSize="Small" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                                <Label Grid.Row="2" Text="{Binding OrderSize}" TextColor="White" FontSize="Small" VerticalOptions="Center" LineBreakMode="WordWrap"/>
+                                <Label Grid.Row="3" Grid.Column="0" Text="Quantity:" TextColor="White" FontSize="Small" VerticalOptions="Center" />
+                                <Entry Grid.Row="3" Grid.Column="1" x:Name="PROQTY" Text="{Binding Qty}" TextColor="Black" FontSize="Small" VerticalOptions="Center" BackgroundColor="White" HorizontalTextAlignment="End" TextChanged="QtyChange" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

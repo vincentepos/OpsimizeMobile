@@ -221,4 +221,10 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\uncheck32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\check32.png" />
+  </ItemGroup>
 </Project>

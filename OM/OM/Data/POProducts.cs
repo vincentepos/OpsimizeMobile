@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Xamarin.Forms;
 
 namespace OM.Data
 {
@@ -21,6 +22,8 @@ namespace OM.Data
         public string Code { get; set; }
         public double Qty { get; set; }
         public string OrderSize { get; set; }
+        public bool Selected { get; set; }
+        public string CkImg { get; set; } = "check32.png";
 
         public double ProQty
         {
@@ -31,6 +34,28 @@ namespace OM.Data
                 OnPropertyChanged();
             }
         }
+
+
+
+        public bool Sel
+        {
+            get { return Selected; }
+            set
+            {
+                Selected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //public string Ck_Img
+        //{
+        //    get { return CkImg; }
+        //    set
+        //    {
+        //        CkImg = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 

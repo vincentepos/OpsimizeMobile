@@ -13,11 +13,12 @@
             
             <SearchBar x:Name="poline_search" Placeholder="Search" TextColor="White" BackgroundColor="Transparent"/>
 
-            <ListView x:Name="POLineListView" BackgroundColor="Transparent" ItemTapped="OnItemTapped">
+            <ListView x:Name="POLineListView" BackgroundColor="Transparent" ItemTapped="OnItemTapped" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
+                                <!--<Image Grid.Column="0" Source="{Binding CkImg}" IsVisible="{Binding Selected}" HeightRequest="16" WidthRequest="16" />-->
                                 <Label Grid.Column="0" Text="{Binding Code}" TextColor="White" FontSize="Small" />
                                 <Label Grid.Column="1" Text="{Binding Name}" TextColor="White" FontSize="Small" />
                                 <Label Grid.Column="2" Text="{Binding Supplier}" TextColor="White" FontSize="Small" />
