@@ -43,6 +43,7 @@ namespace OM.Views
             // Create an HttpClientHandler object and set to use default credentials
             HttpClientHandler handler = new HttpClientHandler();
             handler.UseDefaultCredentials = true;
+            ActivitySpinner.IsVisible = true;
 
             var client = new HttpClient(handler);
             client.MaxResponseContentBufferSize = 256000;
@@ -59,7 +60,7 @@ namespace OM.Views
                 if (result != null)
                 {
                     await DisplayAlert("Login", "Login Success", "Ok");
-
+                    ActivitySpinner.IsVisible = false;
                     if (Device.RuntimePlatform == Device.Android)
                     {
                         Application.Current.MainPage = new NavigationPage(new Dashboard(user));
@@ -72,6 +73,7 @@ namespace OM.Views
                 else
                 {
                     await DisplayAlert("Login", "Login Failed, username and password do not match", "Ok");
+                    ActivitySpinner.IsVisible = false;
                 }
                 
             }
@@ -80,6 +82,7 @@ namespace OM.Views
                 Console.WriteLine("\nException Caught!");
                 Console.WriteLine("Message :{0} ", ex.Message);
                 await DisplayAlert("Login", "Login Error, Please try again", "Ok");
+                ActivitySpinner.IsVisible = false;
             }
         }
 

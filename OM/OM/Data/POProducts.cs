@@ -22,6 +22,8 @@ namespace OM.Data
         public string Code { get; set; }
         public double Qty { get; set; }
         public string OrderSize { get; set; }
+        public long OrderSizeID { get; set; }
+        public string OrderRef { get; set; }
         public bool Selected { get; set; }
         public string CkImg { get; set; } = "check32.png";
 

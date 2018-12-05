@@ -94,7 +94,7 @@ namespace OM.Views
             LineList = ObjPOList.Lines;
             foreach (var item in LineList)
             {
-                PROItems.Add(new ProductLine { Code = item.Code, Name = item.Description, Supplier = item.Supplier, ProductID = Convert.ToInt16(item.ProductID), OrderSize = item.OrderSize, Qty = item.Qty });
+                PROItems.Add(new ProductLine { Code = item.Code, Name = item.Description, Supplier = item.Supplier, ProductID = Convert.ToInt16(item.ProductID), OrderSize = item.OrderSize, Qty = item.Qty, OrderSizeID = item.OrderSizeID });
             }
         }
 

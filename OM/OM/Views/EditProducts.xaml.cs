@@ -16,7 +16,7 @@ using Xamarin.Forms.Xaml;
 namespace OM.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class NewPOView : ContentPage
+	public partial class EditProducts : ContentPage
 	{
         public ObservableCollection<ProductLine> YourCollection { get; set; }
         public POProducts POProductsList = new POProducts();
@@ -32,8 +32,7 @@ namespace OM.Views
         public string qty;
         public long _Site;
 
-
-        public NewPOView (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, List<ProductLine> Products, long SiteID)
+        public EditProducts (string un, string pw, string OrderRef, string Status, string OrderFor, string OrderBy, DateTime DeliveryDate, List<ProductLine> Products, long SiteID)
 		{
             username = un;
             password = pw;
@@ -51,7 +50,6 @@ namespace OM.Views
             InitializeComponent ();
             Init();
             BindingContext = new ProductLine();
-
         }
 
         void Init()
@@ -72,29 +70,6 @@ namespace OM.Views
             OrderedByText.Text = _OrderBy;
             OrderForText.Text = _OrderFor;
             StatusText.Text = _OrderStatus;
-
-            
-
-            //foreach (var item in Items)
-            //{
-            //    //PROItems.Add(new ProductLine { Code = item.Code, Name = item.Description, Supplier = item.Supplier, ProductID = Convert.ToInt16(item.ProductID), OrderSize = item.OrderSize, Qty = item.Qty });
-            //    long ProID = Convert.ToInt16(item.ProductID);
-
-            //    var client = new HttpClient();
-            //    client.MaxResponseContentBufferSize = 256000;
-            //    client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
-            //    client.DefaultRequestHeaders.Add("Accept", "application/json");
-            //    string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
-            //    client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
-            //    var response = await client.GetAsync(Constants.GetOrderSizesUrl + "?ProductID=" + ProID);
-
-            //    var osJson = await response.Content.ReadAsStringAsync();
-            //    OrderSize ObjOSList = new OrderSize();
-            //    if (osJson != "")
-            //    {
-            //        ObjOSList = JsonConvert.DeserializeObject<OrderSize>(osJson);
-            //    }
-            //}
         }
 
         public void OrderSize_ItemTapped(object sender, ItemTappedEventArgs e)

@@ -23,5 +23,6 @@ namespace OM.Data
         public long ProductID { get; set; }
         public string Supplier { get; set; }
         public long POLineID { get; set; }
+        public long OrderSizeID { get; set; }
     }
 }

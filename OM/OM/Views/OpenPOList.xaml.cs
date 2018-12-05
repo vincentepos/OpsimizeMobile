@@ -3,6 +3,7 @@ using OM.Data;
 using OM.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,6 +18,7 @@ namespace OM.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class OpenPOList : ContentPage
 	{
+        public ObservableCollection<Item> YourCollection { get; set; }
         public List<Item> Items = new List<Item>();
         public string username;
         public string password;
@@ -55,8 +57,9 @@ namespace OM.Views
             {
                 ObjPOList = JsonConvert.DeserializeObject<PurchaseOrders>(poJson);
             }
+            YourCollection = new ObservableCollection<Item>(ObjPOList.Items);
             Items = ObjPOList.Items;
-            var sorted = Items.OrderByDescending(x => x.DateOrdered).ToList();
+            var sorted = YourCollection.OrderByDescending(x => x.DateOrdered).ToList();
             PurchaseOrdersListView.ItemsSource = sorted;
             PurchaseOrdersListView.ItemTapped += PurchaseOrdersListView_ItemTapped;
             
@@ -64,6 +67,31 @@ namespace OM.Views
             //Console.WriteLine("Log List" + po);
             //PurchaseOrdersListView.ItemsSource = po;
             
+        }
+
+        async public void OnDelete(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+            Item dataItem = (Item)mi.CommandParameter;
+
+            //----Call Delete PO Line API here ----// "?POLineRef="
+            var client = new HttpClient();
+            client.MaxResponseContentBufferSize = 256000;
+            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+            var response = await client.GetStringAsync(Constants.DeletePOUrl + "?PORef=" + dataItem.OrderRef);
+            GeneralResponse result = JsonConvert.DeserializeObject<GeneralResponse>(response);
+            if (result.Response == true)
+            {
+                YourCollection.Remove(dataItem);
+                await DisplayAlert("Order Removed", "Order with Ref " + dataItem.OrderRef + " removed", "Ok");
+            }
+            else
+            {
+                await DisplayAlert("Order Not Removed", result.Message, "Ok");
+            }
         }
 
         public void PurchaseOrdersListView_ItemTapped(object sender, ItemTappedEventArgs e)

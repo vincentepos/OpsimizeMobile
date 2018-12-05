@@ -16,9 +16,10 @@ namespace OM.Data
     {
         public string OrderSize { get; set; }
         public int ProductID { get; set; }
+        public long OrderSizeID { get; set; }
 
-        Site selectedPID;
-        public Site SelectedPID
+        OrderSizeList selectedPID;
+        public OrderSizeList SelectedPID
         {
             get { return selectedPID; }
             set
