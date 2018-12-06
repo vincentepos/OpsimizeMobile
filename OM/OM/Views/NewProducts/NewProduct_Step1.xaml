@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.NewProducts.NewProduct_Step1"
+             Title="New Product">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="30, 10, 30, 0"  
+                            iOS="30, 10, 30, 0"/>
+            </StackLayout.Padding>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Code:" TextColor="White" />
+                <Entry Grid.Row="1" x:Name="CodeEntry" Placeholder="Code" FontSize="Small" TextColor="White" />
+                <Label Grid.Row="2" Text="Description:" TextColor="White" />
+                <Entry Grid.Row="3" x:Name="DescriptionEntry" Placeholder="Description" FontSize="Small" TextColor="White" />
+                <Label Grid.Row="4" Text="UOM:" TextColor="White" />
+                <Picker Grid.Row="5" x:Name="UOMPicker" Title="Select UOM" ItemsSource="{Binding OUMList}" ItemDisplayBinding="{Binding UOMName}" SelectedItem="{Binding SelUOM}"  FontSize="Small" TextColor="White" BackgroundColor="Transparent" />
+                <Label Grid.Row="6" Text="Supplier:" TextColor="White" />
+                <Picker Grid.Row="7" x:Name="SupplierPicker" Title="Select Supplier" ItemsSource="{Binding SupplierList}" ItemDisplayBinding="{Binding SupplierName}" SelectedItem="{Binding SelSUP}"  FontSize="Small" TextColor="White" BackgroundColor="Transparent" />
+                <Label Grid.Row="8" x:Name="SupplierIDText" Text="{Binding SelSUP.SupplierName}" FontSize="Small" TextColor="Transparent" />
+                <Label Grid.Row="9" x:Name="UOMIDText" Text="{Binding SelUOM.UOMName}" FontSize="Small" TextColor="Transparent" />
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Text="Next" Clicked="Step2Procedure" BackgroundColor="Silver" TextColor="Black"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

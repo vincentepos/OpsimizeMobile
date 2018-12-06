@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using OM.Data;
 using OM.Models;
+using OM.Views.NewProducts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -138,6 +139,11 @@ namespace OM.Views
                 await DisplayAlert("Alert", "No Products Selected", "Ok");
             }
             
+        }
+
+        async void NewProductsProcedure(object sender, EventArgs x)
+        {
+            await Navigation.PushAsync(new NewProduct_Step1(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, PROItems, _Site));
         }
     }
 }

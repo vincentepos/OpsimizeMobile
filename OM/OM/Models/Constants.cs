@@ -17,8 +17,8 @@ namespace OM.Models
 
         //-------------Base URL------------//
         //public static string BaseURL = "https://app.opsimize.com/rest/mobileapp/v1/";
-        public static string BaseURL = "http://opsimize.eposability.com/rest/mobileapp/v1/";
-        //public static string BaseURL = "http://10.0.2.2:8081/rest/mobileapp/v1/";
+        //public static string BaseURL = "http://opsimize.eposability.com/rest/mobileapp/v1/";
+        public static string BaseURL = "http://10.0.2.2:8081/rest/mobileapp/v1/";
 
         //-------------Login------------//
         public static string LoginUrl = BaseURL + "Token";
@@ -75,6 +75,12 @@ namespace OM.Models
         public static string DeletePOUrl = BaseURL + "PurchaceOrder/DeletePO"; // ?PORef=1411428 
 
         //-------------Order Size Update---------------//
-        public static string UpdateOSUrl = BaseURL + "PurchaceOrder/OrderSizeUpdate"; 
+        public static string UpdateOSUrl = BaseURL + "PurchaceOrder/OrderSizeUpdate";
+
+        //-------------New Supplier Product---------------//
+        public static string NewSPProductUrl = BaseURL + "Products/NewProduct";
+
+        //-------------Update Supplier Product---------------//
+        public static string UpdateProductS1Url = BaseURL + "Products/UpdateProductStep1";
     }
 }

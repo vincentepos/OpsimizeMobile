@@ -18,7 +18,11 @@
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
-                                <!--<Image Grid.Column="0" Source="{Binding CkImg}" IsVisible="{Binding Selected}" HeightRequest="16" WidthRequest="16" />-->
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
                                 <Label Grid.Column="0" Text="{Binding Code}" TextColor="White" FontSize="Small" />
                                 <Label Grid.Column="1" Text="{Binding Name}" TextColor="White" FontSize="Small" />
                                 <Label Grid.Column="2" Text="{Binding Supplier}" TextColor="White" FontSize="Small" />
@@ -27,8 +31,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
+            
+            <Button Text="New Product" Clicked="NewProductsProcedure" BackgroundColor="Silver" TextColor="Black"/>
             <Button Text="Done" Clicked="AddProductsDoneProcedure" BackgroundColor="Silver" TextColor="Black"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
