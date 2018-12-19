@@ -8,21 +8,22 @@
                 <Image x:Name="LoginIcon" Source="LoginIcon.png" Margin="0,80,0,0" />
             </StackLayout>
             <StackLayout x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
-            <StackLayout.Padding>
-                <OnPlatform x:TypeArguments="Thickness" 
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness" 
                             Android="40, 0, 40, 0" 
-                            WinPhone="40, 0, 40, 0" 
                             iOS="40, 0, 40, 0"/>
-            </StackLayout.Padding>
+                </StackLayout.Padding>
 
-            <ActivityIndicator x:Name="ActivitySpinner" Color="White" IsRunning="True" />
+                <ActivityIndicator x:Name="ActivitySpinner" Color="White" IsRunning="True" />
 
-            <Label x:Name="Lbl_Username" Text="Username" />
-            <Entry x:Name="Entry_Username" Placeholder="Username" FontSize="Medium" />
-            <Label x:Name="Lbl_Password" Text="Password" />
-            <Entry x:Name="Entry_Password" Placeholder="Password" FontSize="Medium" IsPassword="True" />
-            <Button x:Name="Btn_Signin" Text="Sign In" Clicked="SignInProcedure" BackgroundColor="Silver" TextColor="Black"/>
-        </StackLayout>
+                <Label x:Name="msgText"  />
+
+                <Label x:Name="Lbl_Username" Text="Username" />
+                <Entry x:Name="Entry_Username" Placeholder="Username" FontSize="Medium" />
+                <Label x:Name="Lbl_Password" Text="Password" />
+                <Entry x:Name="Entry_Password" Placeholder="Password" FontSize="Medium" IsPassword="True" />
+                <Button x:Name="Btn_Signin" Text="Sign In" Clicked="SignInProcedure" BackgroundColor="Silver" TextColor="Black"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -8,7 +8,6 @@
             <StackLayout.Padding>
                 <OnPlatform x:TypeArguments="Thickness" 
                             Android="30, 30, 30, 0" 
-                            WinPhone="30, 30, 30, 0" 
                             iOS="30, 30, 30, 0"/>
             </StackLayout.Padding>
 

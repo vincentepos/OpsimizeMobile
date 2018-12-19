@@ -23,6 +23,7 @@ namespace OM.Views
 	{
         public string username;
         public string password;
+        public DeviceToken deviceToken = new DeviceToken();
 
         public Dashboard (User user)
 		{
@@ -33,6 +34,32 @@ namespace OM.Views
             User users = new User();
             users = user;
             Console.WriteLine("Username: " + users.Username);
+
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                string token = App.CredentialsServce.DToken;
+                deviceToken.Token = token;
+                var url = Constants.DeviceToken + "?Token=" + token;
+
+                var client2 = new HttpClient();
+                client2.MaxResponseContentBufferSize = 256000;
+                client2.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+                client2.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                client2.DefaultRequestHeaders.Add("Accept", "application/json");
+                string userAndPasswordToken2 = Convert.ToBase64String(Encoding.UTF8.GetBytes(user.Username + ":" + user.Password));
+                client2.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken2}");
+                
+                Console.WriteLine("Post URL: " + url);
+                var jstring = JsonConvert.SerializeObject(deviceToken);
+                var content = new StringContent(jstring, Encoding.UTF8, "application/json");
+                var response2 = client2.PostAsync(url, content).Result;
+                var result2 = JsonConvert.DeserializeObject<GeneralResponse>(response2.Content.ReadAsStringAsync().Result);
+                Console.WriteLine("Post Result: " + response2.Content.ReadAsStringAsync().Result);
+            }
+            else if (Device.RuntimePlatform == Device.iOS)
+            {
+                // implement IOS token here
+            }
         }        
 
         void Init()

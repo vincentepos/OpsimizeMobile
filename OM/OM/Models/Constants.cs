@@ -17,8 +17,8 @@ namespace OM.Models
 
         //-------------Base URL------------//
         //public static string BaseURL = "https://app.opsimize.com/rest/mobileapp/v1/";
-        //public static string BaseURL = "http://opsimize.eposability.com/rest/mobileapp/v1/";
-        public static string BaseURL = "http://10.0.2.2:8081/rest/mobileapp/v1/";
+        public static string BaseURL = "http://opsimize.eposability.com/rest/mobileapp/v1/";
+        //public static string BaseURL = "http://10.0.2.2:8081/rest/mobileapp/v1/";
 
         //-------------Login------------//
         public static string LoginUrl = BaseURL + "Token";
@@ -82,5 +82,8 @@ namespace OM.Models
 
         //-------------Update Supplier Product---------------//
         public static string UpdateProductS1Url = BaseURL + "Products/UpdateProductStep1";
+
+        //-------------Device Token------------//
+        public static string DeviceToken = BaseURL + "Token/DeviceToken"; // ?Token=123456
     }
 }

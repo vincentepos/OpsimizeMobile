@@ -1,4 +1,5 @@
 using OM.Data;
+using OM.Models;
 using OM.Views;
 using System;
 using Xamarin.Forms;
@@ -13,11 +14,28 @@ namespace OM
         static RestGetPO restServicePO;
         static UserDatabaseController userDatabase;
 
+        public static string AppName { get { return "StoreAccountInfoApp"; } }
+
+        public static ICredentialsService CredentialsServce { get; private set; }
+
         public App ()
 		{
-			InitializeComponent();
+            CredentialsServce = new CredentialsService();
+            if (CredentialsServce.DoCredentialsExist())
+            {
+                User user = new User(CredentialsServce.UserName, CredentialsServce.Password);
+                Console.WriteLine("Username: " + user.Username + ", Password: " + user.Password);
+                // have to push the device token back to mendix here
+                MainPage = new Dashboard(user); 
+            }
+            else
+            {
+                MainPage = new LoginPage();
+            }
 
-			MainPage = new LoginPage();
+            InitializeComponent();
+
+			
 		}
 
 		protected override void OnStart ()

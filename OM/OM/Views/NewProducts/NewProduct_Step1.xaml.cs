@@ -107,6 +107,14 @@ namespace OM.Views.NewProducts
             var response = client.PostAsync(Constants.UpdateProductS1Url, content).Result;
             var result = JsonConvert.DeserializeObject<GeneralResponse>(response.Content.ReadAsStringAsync().Result);
             Console.WriteLine("Post Result: " + response.Content.ReadAsStringAsync().Result);
+            if (result != null)
+            {
+                //await Navigation.PushAsync(new EditPOLines(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, _Site, PROItems));
+            }
+            else
+            {
+                await DisplayAlert("Error", "Can not go to next step, connection error.", "Ok");
+            }
         }
     }
 }

@@ -18,7 +18,9 @@ namespace OM.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoginPage : ContentPage
 	{
-		public LoginPage ()
+        public DeviceToken deviceToken = new DeviceToken();
+
+        public LoginPage ()
 		{
 			InitializeComponent ();
             Init();
@@ -45,6 +47,10 @@ namespace OM.Views
             handler.UseDefaultCredentials = true;
             ActivitySpinner.IsVisible = true;
 
+            string token = App.Current.Properties["token"].ToString();
+            Console.WriteLine("Application token: " + token);
+            deviceToken.Token = token;
+
             var client = new HttpClient(handler);
             client.MaxResponseContentBufferSize = 256000;
             client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
@@ -61,6 +67,7 @@ namespace OM.Views
                 {
                     await DisplayAlert("Login", "Login Success", "Ok");
                     ActivitySpinner.IsVisible = false;
+                    App.CredentialsServce.SaveCredentials(user.Username, user.Password, token);
                     if (Device.RuntimePlatform == Device.Android)
                     {
                         Application.Current.MainPage = new NavigationPage(new Dashboard(user));
@@ -81,7 +88,7 @@ namespace OM.Views
             {
                 Console.WriteLine("\nException Caught!");
                 Console.WriteLine("Message :{0} ", ex.Message);
-                await DisplayAlert("Login", "Login Error, Please try again", "Ok");
+                await DisplayAlert("Login", "Login Error, Please try again later", "Ok");
                 ActivitySpinner.IsVisible = false;
             }
         }

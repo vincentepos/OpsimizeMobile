@@ -227,4 +227,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\check32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\NotiIcon.png" />
+  </ItemGroup>
 </Project>
