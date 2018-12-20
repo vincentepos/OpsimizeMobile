@@ -30,7 +30,7 @@ namespace OM.Models
         public static string PoRefUrl = BaseURL + "PurchaceOrder"; // ?PORef=14114282
 
         //-------------PO Line List---------------//
-        public static string PoLineUrl = BaseURL + "PurchaceOrderLines"; // ?PORef=1411428
+        public static string PoLineUrl = BaseURL + "PurchaceOrderLines"; // ?PORef=1411428 
 
         //-------------Take Delivery---------------//
         public static string TakeDeliveryUrl = BaseURL + "TakeDelivery"; // ?OrderRef=1411428

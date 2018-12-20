@@ -32,7 +32,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             
-            <Button Text="New Product" Clicked="NewProductsProcedure" BackgroundColor="Silver" TextColor="Black"/>
+            <!--<Button Text="New Product" Clicked="NewProductsProcedure" BackgroundColor="Silver" TextColor="Black"/>-->
             <Button Text="Done" Clicked="AddProductsDoneProcedure" BackgroundColor="Silver" TextColor="Black"/>
 
         </StackLayout>

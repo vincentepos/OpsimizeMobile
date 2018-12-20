@@ -141,9 +141,9 @@ namespace OM.Views
             
         }
 
-        async void NewProductsProcedure(object sender, EventArgs x)
-        {
-            await Navigation.PushAsync(new NewProduct_Step1(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, PROItems, _Site));
-        }
+        //async void NewProductsProcedure(object sender, EventArgs x)
+        //{
+        //    await Navigation.PushAsync(new NewProduct_Step1(username, password, _OrderReference, _OrderStatus, _OrderFor, _OrderBy, _OrderDeliveryDate, PROItems, _Site));
+        //}
     }
 }
