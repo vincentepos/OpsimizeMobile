@@ -58,7 +58,24 @@ namespace OM.Views
             }
             else if (Device.RuntimePlatform == Device.iOS)
             {
-                // implement IOS token here
+                string token = App.Current.Properties["tokenios"].ToString();
+
+                var url = Constants.DeviceTokenIOS + "?Token=" + token;
+
+                var client2 = new HttpClient();
+                client2.MaxResponseContentBufferSize = 256000;
+                client2.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+                client2.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                client2.DefaultRequestHeaders.Add("Accept", "application/json");
+                string userAndPasswordToken2 = Convert.ToBase64String(Encoding.UTF8.GetBytes(user.Username + ":" + user.Password));
+                client2.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken2}");
+
+                Console.WriteLine("Post URL: " + url);
+                var jstring = JsonConvert.SerializeObject(deviceToken);
+                var content = new StringContent(jstring, Encoding.UTF8, "application/json");
+                var response2 = client2.PostAsync(url, content).Result;
+                var result2 = JsonConvert.DeserializeObject<GeneralResponse>(response2.Content.ReadAsStringAsync().Result);
+                Console.WriteLine("Post Result: " + response2.Content.ReadAsStringAsync().Result);
             }
         }        
 

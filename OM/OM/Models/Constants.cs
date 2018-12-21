@@ -85,5 +85,8 @@ namespace OM.Models
 
         //-------------Device Token------------//
         public static string DeviceToken = BaseURL + "Token/DeviceToken"; // ?Token=123456
+
+        //-------------Device Token IOS------------//
+        public static string DeviceTokenIOS = BaseURL + "Token/DeviceTokenIOS"; // ?Token=123456
     }
 }

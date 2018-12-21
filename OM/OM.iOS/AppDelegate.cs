@@ -71,6 +71,7 @@ namespace OM.iOS
         {
             Messaging.SharedInstance.ApnsToken = deviceToken;
             Console.WriteLine($"Firebase registration token: {deviceToken}");
+            App.Current.Properties["tokenios"] = deviceToken;
         }
     }
 }
