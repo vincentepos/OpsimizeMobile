@@ -21,7 +21,7 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>OM</string>
+	<string>Opsimize IOS App</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>XSAppIconAssets</key>
@@ -40,5 +40,9 @@
 	<string>5</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.opsimize.opsimizeapp</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>
