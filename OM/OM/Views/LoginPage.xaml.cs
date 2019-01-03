@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -56,7 +56,7 @@ namespace OM.Views
             }
             else if (Device.RuntimePlatform == Device.iOS)
             {
-                token = App.Current.Properties["tokenios"].ToString();
+                token = App.Current.Properties["tkn"].ToString();
                 Console.WriteLine("Application tokenios: " + token);
                 deviceToken.Token = token;
             }

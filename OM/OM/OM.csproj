@@ -71,4 +71,7 @@
   <ItemGroup>
     <Compile Remove="Models\MainViewModel.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\OM.ipa" />
+  </ItemGroup>
 </Project>

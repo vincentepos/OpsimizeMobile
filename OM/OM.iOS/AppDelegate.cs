@@ -31,10 +31,11 @@ namespace OM.iOS
 
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+            App.Current.Properties.Add("tkn", "t123");
 
             FirebasePushNotificationManager.Initialize(options, true);
 
-            Firebase.Core.App.Configure();
+            //Firebase.Core.App.Configure();
 
             Messaging.SharedInstance.Delegate = this;
 
@@ -92,7 +93,17 @@ namespace OM.iOS
             CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
             {
                 System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
-                App.Current.Properties["tokenios"] = p.Token;
+                //App.Current.Properties["tkn"] = p.Token;
+                if (App.Current.Properties.ContainsKey("tkn"))
+                {
+                    App.Current.Properties["tkn"] = p.Token;
+                }  
+                else
+                {
+                    App.Current.Properties.Add("tkn", p.Token);
+                }
+
+                //Preferences.Set("my_key", p.Token);
             };
 
         }
