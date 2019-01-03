@@ -59,10 +59,9 @@ namespace OM.Views
             }
             else if (Device.RuntimePlatform == Device.iOS)
             {
-                //string token = App.Current.Properties["tokenios"].ToString();
-                var token = Preferences.Get("my_key", "defaultValueIfNotExists");
-
-                var url = Constants.DeviceTokenIOS + "?Token=" + token;
+                string token = App.CredentialsServce.DToken;
+                deviceToken.Token = token;
+                var url = Constants.DeviceToken + "?Token=" + token;
 
                 var client2 = new HttpClient();
                 client2.MaxResponseContentBufferSize = 256000;

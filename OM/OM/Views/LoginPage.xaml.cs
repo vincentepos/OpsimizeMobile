@@ -19,6 +19,7 @@ namespace OM.Views
 	public partial class LoginPage : ContentPage
 	{
         public DeviceToken deviceToken = new DeviceToken();
+        public string token;
 
         public LoginPage ()
 		{
@@ -47,11 +48,20 @@ namespace OM.Views
             handler.UseDefaultCredentials = true;
             ActivitySpinner.IsVisible = true;
 
-            string token = "";
             if (Device.RuntimePlatform == Device.Android)
             {
                 token = App.Current.Properties["token"].ToString();
+                Console.WriteLine("Application token: " + token);
+                deviceToken.Token = token;
             }
+            else if (Device.RuntimePlatform == Device.iOS)
+            {
+                token = App.Current.Properties["tokenios"].ToString();
+                Console.WriteLine("Application tokenios: " + token);
+                deviceToken.Token = token;
+            }
+
+            
 
             var client = new HttpClient(handler);
             client.MaxResponseContentBufferSize = 256000;

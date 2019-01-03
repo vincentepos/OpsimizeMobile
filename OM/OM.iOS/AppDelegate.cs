@@ -8,6 +8,7 @@ using UIKit;
 using UserNotifications;
 using Firebase.Core;
 using Xamarin.Essentials;
+using Plugin.FirebasePushNotification;
 
 namespace OM.iOS
 {
@@ -30,6 +31,8 @@ namespace OM.iOS
 
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+
+            FirebasePushNotificationManager.Initialize(options, true);
 
             Firebase.Core.App.Configure();
 
@@ -70,18 +73,27 @@ namespace OM.iOS
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
+            //Messaging.SharedInstance.ApnsToken = deviceToken;
+            //Console.WriteLine($"Firebase registration token: {deviceToken}");
+            //if (deviceToken != null)
+            //{
+            //    //App.Current.Properties["tokenios"] = deviceToken;
+            //    Preferences.Set("my_key", deviceToken.ToString());
+            //}
+            //else
+            //{
+            //    //App.Current.Properties["tokenios"] = "Test123";
+            //    Preferences.Set("my_key", "Test123");
+            //}
+
+            FirebasePushNotificationManager.DidRegisterRemoteNotifications(deviceToken);
             Messaging.SharedInstance.ApnsToken = deviceToken;
             Console.WriteLine($"Firebase registration token: {deviceToken}");
-            if (deviceToken != null)
+            CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
             {
-                //App.Current.Properties["tokenios"] = deviceToken;
-                Preferences.Set("my_key", deviceToken.ToString());
-            }
-            else
-            {
-                //App.Current.Properties["tokenios"] = "Test123";
-                Preferences.Set("my_key", "Test123");
-            }
+                System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
+                App.Current.Properties["tokenios"] = p.Token;
+            };
 
         }
     }
