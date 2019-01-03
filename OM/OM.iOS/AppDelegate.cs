@@ -31,7 +31,6 @@ namespace OM.iOS
 
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-            App.Current.Properties.Add("tkn", "t123");
 
             FirebasePushNotificationManager.Initialize(options, true);
 
@@ -94,14 +93,7 @@ namespace OM.iOS
             {
                 System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
                 //App.Current.Properties["tkn"] = p.Token;
-                if (App.Current.Properties.ContainsKey("tkn"))
-                {
-                    App.Current.Properties["tkn"] = p.Token;
-                }  
-                else
-                {
-                    App.Current.Properties.Add("tkn", p.Token);
-                }
+                App.Current.Properties.Add("tkn", p.Token);
 
                 //Preferences.Set("my_key", p.Token);
             };
