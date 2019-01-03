@@ -26,7 +26,7 @@ namespace OM
                 User user = new User(CredentialsServce.UserName, CredentialsServce.Password);
                 Console.WriteLine("Username: " + user.Username + ", Password: " + user.Password);
                 // have to push the device token back to mendix here
-                MainPage = new Dashboard(user); 
+                MainPage = new NavigationPage(new Dashboard(user));
             }
             else
             {
