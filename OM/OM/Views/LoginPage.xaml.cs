@@ -47,9 +47,11 @@ namespace OM.Views
             handler.UseDefaultCredentials = true;
             ActivitySpinner.IsVisible = true;
 
-            string token = App.Current.Properties["token"].ToString();
-            Console.WriteLine("Application token: " + token);
-            deviceToken.Token = token;
+            string token = "";
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                token = App.Current.Properties["token"].ToString();
+            }
 
             var client = new HttpClient(handler);
             client.MaxResponseContentBufferSize = 256000;

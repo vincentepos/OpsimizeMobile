@@ -7,6 +7,7 @@ using Foundation;
 using UIKit;
 using UserNotifications;
 using Firebase.Core;
+using Xamarin.Essentials;
 
 namespace OM.iOS
 {
@@ -71,7 +72,17 @@ namespace OM.iOS
         {
             Messaging.SharedInstance.ApnsToken = deviceToken;
             Console.WriteLine($"Firebase registration token: {deviceToken}");
-            App.Current.Properties["tokenios"] = deviceToken;
+            if (deviceToken != null)
+            {
+                //App.Current.Properties["tokenios"] = deviceToken;
+                Preferences.Set("my_key", deviceToken.ToString());
+            }
+            else
+            {
+                //App.Current.Properties["tokenios"] = "Test123";
+                Preferences.Set("my_key", "Test123");
+            }
+
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Net.Http;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 using OM.Models;
 using Newtonsoft.Json;
 using OM.Data;
@@ -58,7 +59,8 @@ namespace OM.Views
             }
             else if (Device.RuntimePlatform == Device.iOS)
             {
-                string token = App.Current.Properties["tokenios"].ToString();
+                //string token = App.Current.Properties["tokenios"].ToString();
+                var token = Preferences.Get("my_key", "defaultValueIfNotExists");
 
                 var url = Constants.DeviceTokenIOS + "?Token=" + token;
 
