@@ -61,7 +61,7 @@ namespace OM.Views
             {
                 string token = App.CredentialsServce.DToken;
                 deviceToken.Token = token;
-                var url = Constants.DeviceToken + "?Token=" + token;
+                var url = Constants.DeviceTokenIOS + "?Token=" + token;
 
                 var client2 = new HttpClient();
                 client2.MaxResponseContentBufferSize = 256000;

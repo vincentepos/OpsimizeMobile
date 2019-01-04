@@ -70,7 +70,14 @@ namespace OM.iOS
 
             var token = Messaging.SharedInstance.FcmToken ?? "";
             Console.WriteLine($"FCM token: {token}");
-            App.Current.Properties.Add("tkn", token);
+            if (App.Current.Properties.ContainsKey("tkn"))
+            {
+                App.Current.Properties["tkn"] = token;
+            }
+            else
+            {
+                App.Current.Properties.Add("tkn", token);
+            }
 
             // TODO: If necessary send token to application server.
             // Note: This callback is fired at each app startup and whenever a new token is generated.
