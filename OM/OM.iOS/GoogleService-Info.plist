@@ -32,5 +32,7 @@
 	<string>1:455659297278:ios:9f78f71498666dd8</string>
 	<key>DATABASE_URL</key>
 	<string>https://opsimize.firebaseio.com</string>
+	<key>FirebaseMessagingAutoInitEnabled</key>
+	<true/>
 </dict>
 </plist>

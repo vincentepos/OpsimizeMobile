@@ -86,7 +86,7 @@ namespace OM.Views
                     }
                     else if (Device.RuntimePlatform == Device.iOS)
                     {
-                        await Navigation.PushModalAsync(new NavigationPage(new Dashboard(user)));
+                        Application.Current.MainPage = new NavigationPage(new Dashboard(user));
                     }
                 }
                 else

@@ -32,9 +32,9 @@ namespace OM.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
-            FirebasePushNotificationManager.Initialize(options, true);
+            //FirebasePushNotificationManager.Initialize(options, true);
 
-            //Firebase.Core.App.Configure();
+            Firebase.Core.App.Configure();
 
             Messaging.SharedInstance.Delegate = this;
 
@@ -63,9 +63,14 @@ namespace OM.iOS
             return base.FinishedLaunching(app, options);
         }
 
+        [Export("messaging:didReceiveRegistrationToken:")]
         public void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
         {
             Console.WriteLine($"Firebase registration token: {fcmToken}");
+
+            var token = Messaging.SharedInstance.FcmToken ?? "";
+            Console.WriteLine($"FCM token: {token}");
+            App.Current.Properties.Add("tkn", token);
 
             // TODO: If necessary send token to application server.
             // Note: This callback is fired at each app startup and whenever a new token is generated.
@@ -73,8 +78,8 @@ namespace OM.iOS
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
-            //Messaging.SharedInstance.ApnsToken = deviceToken;
-            //Console.WriteLine($"Firebase registration token: {deviceToken}");
+            Messaging.SharedInstance.ApnsToken = deviceToken;
+            Console.WriteLine($"Firebase registration token: {deviceToken}");
             //if (deviceToken != null)
             //{
             //    //App.Current.Properties["tokenios"] = deviceToken;
@@ -86,17 +91,17 @@ namespace OM.iOS
             //    Preferences.Set("my_key", "Test123");
             //}
 
-            FirebasePushNotificationManager.DidRegisterRemoteNotifications(deviceToken);
-            Messaging.SharedInstance.ApnsToken = deviceToken;
-            Console.WriteLine($"Firebase registration token: {deviceToken}");
-            CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
-            {
-                System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
-                //App.Current.Properties["tkn"] = p.Token;
-                App.Current.Properties.Add("tkn", p.Token);
+            //FirebasePushNotificationManager.DidRegisterRemoteNotifications(deviceToken);
+            //Messaging.SharedInstance.ApnsToken = deviceToken;
+            //Console.WriteLine($"Firebase registration token: {deviceToken}");
+            //CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
+            //{
+            //    System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
+            //    //App.Current.Properties["tkn"] = p.Token;
+            //    //App.Current.Properties.Add("tkn", p.Token);
 
-                //Preferences.Set("my_key", p.Token);
-            };
+            //    //Preferences.Set("my_key", p.Token);
+            //};
 
         }
     }
