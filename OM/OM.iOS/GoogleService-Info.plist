@@ -34,5 +34,7 @@
 	<string>https://opsimize.firebaseio.com</string>
 	<key>FirebaseMessagingAutoInitEnabled</key>
 	<true/>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<true/>
 </dict>
 </plist>
