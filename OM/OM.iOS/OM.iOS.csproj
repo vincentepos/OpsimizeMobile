@@ -93,10 +93,10 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer: Vincent Grobler (2DVUWYQ6FX)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Vincent Grobler (4VW3H5D2T3)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
-    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CodesignProvision>com.opsimize.opsimizeapp</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -122,45 +122,28 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
-      <Visible>false</Visible>
-    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_20.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_120 copy.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_40 copy.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_58 copy.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
