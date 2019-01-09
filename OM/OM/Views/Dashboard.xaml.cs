@@ -95,29 +95,30 @@ namespace OM.Views
             await Navigation.PushAsync(new NewPO(username, password));
         }
 
-        async void QuickDeliveryProcedure(object sender, EventArgs e)
-        {
-            await DisplayAlert("Alert", "Quick Delivery not implemented yet.", "Ok");
-        }
+        //async void QuickDeliveryProcedure(object sender, EventArgs e)
+        //{
+        //    await DisplayAlert("Alert", "Quick Delivery not implemented yet.", "Ok");
+        //}
 
-        async void DeliveryNoteProcedure(object sender, EventArgs e)
-        {
-            await DisplayAlert("Alert", "Delivery Notes not implemented yet.", "Ok");
-        }
+        //async void DeliveryNoteProcedure(object sender, EventArgs e)
+        //{
+        //    await DisplayAlert("Alert", "Delivery Notes not implemented yet.", "Ok");
+        //}
 
-        async void CreditNoteProcedure(object sender, EventArgs e)
-        {
-            await DisplayAlert("Alert", "Credit Notes not implemented yet.", "Ok");
-        }
+        //async void CreditNoteProcedure(object sender, EventArgs e)
+        //{
+        //    await DisplayAlert("Alert", "Credit Notes not implemented yet.", "Ok");
+        //}
 
-        async void SupplierProcedure(object sender, EventArgs e)
-        {
-            await DisplayAlert("Alert", "Suppliers not implemented yet.", "Ok");
-        }
+        //async void SupplierProcedure(object sender, EventArgs e)
+        //{
+        //    await DisplayAlert("Alert", "Suppliers not implemented yet.", "Ok");
+        //}
 
         void LogoutProcedure(object sender, EventArgs e)
         {
             App.Current.MainPage = new NavigationPage(new LoginPage());
+            App.CredentialsServce.DeleteCredentials();
             DisplayAlert("Logout", "Logged Out", "Ok");
         }
 

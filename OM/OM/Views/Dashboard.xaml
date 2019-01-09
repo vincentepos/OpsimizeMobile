@@ -7,8 +7,7 @@
         <StackLayout VerticalOptions="Start">
             <StackLayout.Padding>
                 <OnPlatform x:TypeArguments="Thickness" 
-                            Android="40, 0, 40, 0" 
-                            WinPhone="40, 0, 40, 0" 
+                            Android="40, 0, 40, 0"  
                             iOS="40, 0, 40, 0"/>
             </StackLayout.Padding>
 
@@ -36,7 +35,7 @@
                     </Image.GestureRecognizers>
                 </Image>
 
-                <Image Grid.Row="2" Source="quickdelivery256.png" HorizontalOptions="Start" HeightRequest="128" WidthRequest="128">
+                <!--<Image Grid.Row="2" Source="quickdelivery256.png" HorizontalOptions="Start" HeightRequest="128" WidthRequest="128">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer
                 Tapped="QuickDeliveryProcedure"
@@ -66,7 +65,7 @@
                 Tapped="SupplierProcedure"
                 NumberOfTapsRequired="1" />
                     </Image.GestureRecognizers>
-                </Image>
+                </Image>-->
 
             </Grid>
           <StackLayout VerticalOptions="End">
