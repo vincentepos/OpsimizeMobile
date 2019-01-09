@@ -144,6 +144,8 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_120 copy.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_40 copy.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_58 copy.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_40 copy 2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_80 copy.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
