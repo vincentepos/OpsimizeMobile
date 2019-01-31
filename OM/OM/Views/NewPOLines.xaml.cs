@@ -102,8 +102,8 @@ namespace OM.Views
             var dataItem = (ProductLine)(e.Item);
             
             dataItem.Selected = true;
-            Items.Add(new ProductLine { Code = dataItem.Code, Name = dataItem.Name, Supplier = dataItem.Supplier, ProductID = dataItem.ProductID, OrderSize = dataItem.OrderSize });
-            PROItems.Add(new ProductLine { Code = dataItem.Code, Name = dataItem.Name, Supplier = dataItem.Supplier, ProductID = dataItem.ProductID, OrderSize = dataItem.OrderSize });
+            Items.Add(new ProductLine { Code = dataItem.Code, Name = dataItem.Name, Supplier = dataItem.Supplier, ProductID = dataItem.ProductID, OrderSize = dataItem.OrderSize, OrderSizeID = dataItem.OrderSizeID });
+            PROItems.Add(new ProductLine { Code = dataItem.Code, Name = dataItem.Name, Supplier = dataItem.Supplier, ProductID = dataItem.ProductID, OrderSize = dataItem.OrderSize, OrderSizeID = dataItem.OrderSizeID });
             YourCollection.Remove(dataItem);
             DisplayAlert("Item Added", dataItem.Name + " added to Purchase Order", "Ok");
             

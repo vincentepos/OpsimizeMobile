@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.Dashboard2"
+             Title="Notifications">
+    <ContentPage.Content>
+
+        <StackLayout>
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="30, 10, 30, 0" 
+                            iOS="30, 10, 30, 0"/>
+            </StackLayout.Padding>
+
+            <Label x:Name="lbl_NoInternet" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="Red" />
+
+            <SearchBar x:Name="notification_search" Placeholder="Search" TextColor="Black" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Notification Title" TextColor="White" FontSize="Small" TextDecorations="Underline" />
+            </Grid>
+
+            <ListView x:Name="NotificationsListView" BackgroundColor="Transparent" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="{Binding Title}" TextColor="White" FontSize="Small" />
+                                <Label Grid.Row="1" Text="{Binding SendTo}" TextColor="LightGray" FontSize="Small" />
+                                <Label Grid.Row="1" Text="{Binding SendDate, StringFormat='\{0:dd/MM/yyyy HH:mm}'}" TextColor="LightGray" HorizontalTextAlignment="End" FontSize="Small" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="Logout" Clicked="LogoutProcedure" BackgroundColor="Silver" TextColor="Black"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

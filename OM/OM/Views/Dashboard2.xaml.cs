@@ -1,41 +1,39 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using OM.Data;
+using OM.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
-using OM.Models;
-using Newtonsoft.Json;
-using OM.Data;
-using System.Net.Http.Headers;
-using System.Threading;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Converters;
-using System.Dynamic;
 
 namespace OM.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Dashboard : ContentPage
+	public partial class Dashboard2 : ContentPage
 	{
+        public ObservableCollection<Notifications> YourCollection { get; set; }
+        public List<Notifications> Items = new List<Notifications>();
         public string username;
         public string password;
         public DeviceToken deviceToken = new DeviceToken();
+        public long NID;
 
-        public Dashboard (User user)
+        public Dashboard2 (User user)
 		{
             username = user.Username;
             password = user.Password;
-			InitializeComponent ();
+            InitializeComponent ();
             App.StartCheckIfInternet(lbl_NoInternet, this);
             Init();
-            User users = new User();
-            users = user;
-            Console.WriteLine("Username: " + users.Username);
+            GetNotification();
+            InitSearchBar();
 
             if (Device.RuntimePlatform == Device.Android)
             {
@@ -50,7 +48,7 @@ namespace OM.Views
                 client2.DefaultRequestHeaders.Add("Accept", "application/json");
                 string userAndPasswordToken2 = Convert.ToBase64String(Encoding.UTF8.GetBytes(user.Username + ":" + user.Password));
                 client2.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken2}");
-                
+
                 Console.WriteLine("Post URL: " + url);
                 var jstring = JsonConvert.SerializeObject(deviceToken);
                 var content = new StringContent(jstring, Encoding.UTF8, "application/json");
@@ -79,42 +77,73 @@ namespace OM.Views
                 var result2 = JsonConvert.DeserializeObject<GeneralResponse>(response2.Content.ReadAsStringAsync().Result);
                 Console.WriteLine("Post Result: " + response2.Content.ReadAsStringAsync().Result);
             }
-        }        
+        }
 
         void Init()
         {
             BackgroundColor = Constants.BackgroundColor;
+            notification_search.BackgroundColor = Constants.BackgroundColor;
         }
 
-        async void ShowPOListProcedure(object sender, EventArgs e)
+        public async void GetNotification()
         {
-            await Navigation.PushAsync(new OpenPOList(username, password));
+            var client = new HttpClient();
+            client.MaxResponseContentBufferSize = 256000;
+            client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
+            var response = await client.GetAsync(Constants.AllNotifications);
+
+            var notificationJson = await response.Content.ReadAsStringAsync();
+            NotificationList ObjList = new NotificationList();
+            if (notificationJson != "")
+            {
+                ObjList = JsonConvert.DeserializeObject<NotificationList>(notificationJson);
+            }
+            YourCollection = new ObservableCollection<Notifications>(ObjList.Notifications);
+            Items = ObjList.Notifications;
+            var sorted = YourCollection.OrderByDescending(x => x.SendDate).ToList();
+            NotificationsListView.ItemsSource = sorted;
+            NotificationsListView.ItemTapped += NotificationsListView_ItemTapped;
         }
 
-        async void NewPOProcedure(object sender, EventArgs e)
+        public void NotificationsListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new NewPO(username, password));
+            Notifications item = (Notifications)e.Item;
+            NID = item.NotificationID;
+            Navigation.PushAsync(new Cashup(username, password, NID));
+
+            //if (item.Status == "Draft PO")
+            //{
+            //    Navigation.PushAsync(new EditPO(username, password, item.OrderRef, item.Status, item.Location, item.User, item.DateOrdered, item.SiteID, item.OrderValue));
+            //}
+            //else
+            //{
+            //    Navigation.PushAsync(new POView(item, username, password));
+            //}
+
         }
 
-        //async void QuickDeliveryProcedure(object sender, EventArgs e)
-        //{
-        //    await DisplayAlert("Alert", "Quick Delivery not implemented yet.", "Ok");
-        //}
+        void InitSearchBar()
+        {
+            notification_search.TextChanged += (s, e) => FilterItem(notification_search.Text);
+            notification_search.SearchButtonPressed += (s, e) => FilterItem(notification_search.Text);
+        }
 
-        //async void DeliveryNoteProcedure(object sender, EventArgs e)
-        //{
-        //    await DisplayAlert("Alert", "Delivery Notes not implemented yet.", "Ok");
-        //}
-
-        //async void CreditNoteProcedure(object sender, EventArgs e)
-        //{
-        //    await DisplayAlert("Alert", "Credit Notes not implemented yet.", "Ok");
-        //}
-
-        //async void SupplierProcedure(object sender, EventArgs e)
-        //{
-        //    await DisplayAlert("Alert", "Suppliers not implemented yet.", "Ok");
-        //}
+        private void FilterItem(string filter)
+        {
+            NotificationsListView.BeginRefresh();
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                NotificationsListView.ItemsSource = Items;
+            }
+            else
+            {
+                NotificationsListView.ItemsSource = Items.Where(X => (X.Title.ToLower().Contains(filter.ToLower()) || X.SendTo.ToLower().Contains(filter.ToLower()) || X.SendDate.ToLongDateString().Contains(filter.ToLower())));
+            }
+            NotificationsListView.EndRefresh();
+        }
 
         void LogoutProcedure(object sender, EventArgs e)
         {
@@ -122,6 +151,5 @@ namespace OM.Views
             App.CredentialsServce.DeleteCredentials();
             DisplayAlert("Logout", "Logged Out", "Ok");
         }
-
     }
 }

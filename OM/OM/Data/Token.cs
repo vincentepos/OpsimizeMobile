@@ -7,5 +7,6 @@ namespace OM.Data
     public class Tokens
     {
         public string Token { get; set; }
+        public string License { get; set; }
     }
 }

@@ -5,11 +5,15 @@
              Title="Dashboard">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Start">
+            
             <StackLayout.Padding>
                 <OnPlatform x:TypeArguments="Thickness" 
                             Android="40, 0, 40, 0"  
                             iOS="40, 0, 40, 0"/>
             </StackLayout.Padding>
+            <StackLayout>
+                <Label x:Name="lbl_NoInternet" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="Red" />
+            </StackLayout>
 
             <Grid Padding="0" Margin="0" VerticalOptions="Start">
 
@@ -68,7 +72,7 @@
                 </Image>-->
 
             </Grid>
-          <StackLayout VerticalOptions="End">
+          <StackLayout VerticalOptions="EndAndExpand">
             <Button Text="Logout" Clicked="LogoutProcedure" BackgroundColor="Silver" TextColor="Black"/>
           </StackLayout>
         </StackLayout>

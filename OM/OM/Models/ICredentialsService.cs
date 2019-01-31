@@ -12,7 +12,9 @@ namespace OM.Models
 
         string DToken { get; }
 
-        void SaveCredentials(string userName, string password, string DToken);
+        string License { get; }
+
+        void SaveCredentials(string userName, string password, string DToken, string license);
 
         void DeleteCredentials();
 

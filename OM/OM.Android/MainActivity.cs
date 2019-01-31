@@ -24,6 +24,7 @@ namespace OM.Droid
         internal static readonly string CHANNEL_ID = "my_notification_channel";
         internal static readonly int NOTIFICATION_ID = 100;
 
+
         public bool IsPlayServicesAvailable()
         {
             int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
@@ -81,6 +82,11 @@ namespace OM.Droid
             CreateNotificationChannel();
 
             await CrossMedia.Current.Initialize();
+
+            //if (!App.Current.Properties.ContainsKey("license"))
+            //{
+            //    App.Current.Properties.Add("license", "");
+            //}
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());

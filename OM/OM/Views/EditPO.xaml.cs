@@ -161,8 +161,8 @@ namespace OM.Views
 
                 if (result.Response == true)
                 {
-                    App.Current.MainPage = new NavigationPage(new Dashboard(user));
                     await DisplayAlert("Successful", "Purchase Order Successfully Saved", "Ok");
+                    App.Current.MainPage = new NavigationPage(new Dashboard(user));
                 }
                 else
                 {
@@ -200,8 +200,8 @@ namespace OM.Views
 
                 if (result.Response == true)
                 {
-                    App.Current.MainPage = new NavigationPage(new Dashboard(user));
                     await DisplayAlert("Successful", "Purchase Order Successfully Send", "Ok");
+                    App.Current.MainPage = new NavigationPage(new Dashboard(user));
                 }
                 else
                 {

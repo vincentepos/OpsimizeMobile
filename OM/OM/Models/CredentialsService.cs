@@ -35,7 +35,16 @@ namespace OM.Models
             }
         }
 
-        public void SaveCredentials(string userName, string password, string dToken)
+        public string License
+        {
+            get
+            {
+                var account = AccountStore.Create().FindAccountsForService(App.AppName).FirstOrDefault();
+                return (account != null) ? account.Properties["license"] : null;
+            }
+        }
+
+        public void SaveCredentials(string userName, string password, string dToken, string license)
         {
             if (!string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password))
             {
@@ -45,6 +54,7 @@ namespace OM.Models
                 };
                 account.Properties.Add("Password", password);
                 account.Properties.Add("dtoken", dToken);
+                account.Properties.Add("license", license);
                 AccountStore.Create().Save(account, App.AppName);
             }
         }

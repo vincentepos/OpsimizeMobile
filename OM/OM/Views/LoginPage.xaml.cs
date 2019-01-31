@@ -20,6 +20,7 @@ namespace OM.Views
 	{
         public DeviceToken deviceToken = new DeviceToken();
         public string token;
+        public string license;
 
         public LoginPage ()
 		{
@@ -34,6 +35,7 @@ namespace OM.Views
             Lbl_Password.TextColor = Constants.MainTextColor;
             ActivitySpinner.IsVisible = false;
             LoginIcon.HeightRequest = Constants.LoginIconHeight;
+            App.StartCheckIfInternet(lbl_NoInternet, this);
 
             Entry_Username.Completed += (s, e) => Entry_Password.Focus();
             Entry_Password.Completed += (s, e) => SignInProcedure(s, e);
@@ -77,16 +79,31 @@ namespace OM.Views
                 Tokens result = JsonConvert.DeserializeObject<Tokens>(response);
                 if (result != null)
                 {
+                    license = result.License;
                     await DisplayAlert("Login", "Login Success", "Ok");
                     ActivitySpinner.IsVisible = false;
-                    App.CredentialsServce.SaveCredentials(user.Username, user.Password, token);
-                    if (Device.RuntimePlatform == Device.Android)
+                    App.CredentialsServce.SaveCredentials(user.Username, user.Password, token, license);
+                    if(license == "Cashup")
                     {
-                        Application.Current.MainPage = new NavigationPage(new Dashboard(user));
+                        if (Device.RuntimePlatform == Device.Android)
+                        {
+                            Application.Current.MainPage = new NavigationPage(new Dashboard2(user));
+                        }
+                        else if (Device.RuntimePlatform == Device.iOS)
+                        {
+                            Application.Current.MainPage = new NavigationPage(new Dashboard2(user));
+                        }
                     }
-                    else if (Device.RuntimePlatform == Device.iOS)
+                    else
                     {
-                        Application.Current.MainPage = new NavigationPage(new Dashboard(user));
+                        if (Device.RuntimePlatform == Device.Android)
+                        {
+                            Application.Current.MainPage = new NavigationPage(new Dashboard(user));
+                        }
+                        else if (Device.RuntimePlatform == Device.iOS)
+                        {
+                            Application.Current.MainPage = new NavigationPage(new Dashboard(user));
+                        }
                     }
                 }
                 else

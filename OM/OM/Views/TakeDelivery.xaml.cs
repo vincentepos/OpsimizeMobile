@@ -92,13 +92,13 @@ namespace OM.Views
 
             if (result.Response == true)
             {
-                App.Current.MainPage = new NavigationPage(new Dashboard(loginuser));
                 await DisplayAlert("Uploaded", result.Message, "Ok");
+                App.Current.MainPage = new NavigationPage(new Dashboard(loginuser));
             }
             else
             {
-                await Navigation.PopModalAsync();
                 await DisplayAlert("Not Uploaded", result.Message, "Ok");
+                await Navigation.PopModalAsync();
             }
 
             //await Navigation.PopModalAsync();

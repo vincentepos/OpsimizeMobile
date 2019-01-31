@@ -32,9 +32,14 @@ namespace OM.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
-            //FirebasePushNotificationManager.Initialize(options, true);
+            //if (!App.Current.Properties.ContainsKey("license"))
+            //{
+            //    App.Current.Properties.Add("license", "");
+            //}
 
-            Firebase.Core.App.Configure();
+                //FirebasePushNotificationManager.Initialize(options, true);
+
+                Firebase.Core.App.Configure();
 
             Messaging.SharedInstance.Delegate = this;
 

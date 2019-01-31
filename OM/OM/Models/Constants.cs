@@ -15,10 +15,12 @@ namespace OM.Models
 
         public static int LoginIconHeight = 120;
 
+        public static string NoInternetText = "No Internet Connection";
+
         //-------------Base URL------------//
         //public static string BaseURL = "https://app.opsimize.com/rest/mobileapp/v1/";
-        public static string BaseURL = "http://opsimize.eposability.com/rest/mobileapp/v1/";
-        //public static string BaseURL = "http://10.0.2.2:8081/rest/mobileapp/v1/";
+        //public static string BaseURL = "http://opsimize.eposability.com/rest/mobileapp/v1/";
+        public static string BaseURL = "http://10.0.2.2:8081/rest/mobileapp/v1/";
 
         //-------------Login------------//
         public static string LoginUrl = BaseURL + "Token";
@@ -88,5 +90,14 @@ namespace OM.Models
 
         //-------------Device Token IOS------------//
         public static string DeviceTokenIOS = BaseURL + "Token/DeviceTokenIOS"; // ?Token=123456
+
+        //-------------Get Last Notification---------------//
+        public static string LastNotification = BaseURL + "Notifications/LastNotification";
+
+        //-------------Get All Notification---------------//
+        public static string AllNotifications = BaseURL + "Notifications/AllNotifications ";
+
+        //-------------Get Last Notification---------------//
+        public static string Cashup = BaseURL + "Cashup/TradingPeriodByID"; //?NotificationID=123456
     }
 }

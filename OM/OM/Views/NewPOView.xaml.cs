@@ -142,8 +142,8 @@ namespace OM.Views
 
                 if (result.Response == true)
                 {
-                    App.Current.MainPage = new NavigationPage(new Dashboard(user));
                     await DisplayAlert("Successful", "Purchase Order(s) Successfully Created", "Ok");
+                    App.Current.MainPage = new NavigationPage(new Dashboard(user));
                 }
                 else
                 {

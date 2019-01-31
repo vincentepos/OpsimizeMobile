@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.Cashup"
+             Title="Sales and Cashup">
+    <ContentPage.Content>
+        <ScrollView>
+            <ScrollView.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="30, 10, 30, 0" 
+                            iOS="30, 10, 30, 0"/>
+            </ScrollView.Padding>
+            <StackLayout>
+                <StackLayout HeightRequest="200">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Text="Cashup By:" FontSize="Small" TextColor="White" />
+                        <Label Grid.Column="0" Grid.Row="1" Text="Cashup Date:" FontSize="Small" TextColor="White" />
+
+                        <Label Grid.Column="1" Grid.Row="0" x:Name="CashupByText" FontSize="Small" TextColor="White" />
+                        <Label Grid.Column="1" Grid.Row="1" x:Name="CashupDateText" FontSize="Small" TextColor="White" />
+                        
+                        <Label Grid.Column="0" Grid.Row="2" Text="" />
+
+                    </Grid>
+                    
+                    <Label Text="TRANSACTIONS" FontSize="Medium" TextColor="White" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*" />
+                            <ColumnDefinition Width="20*" />
+                            <ColumnDefinition Width="20*" />
+                            <ColumnDefinition Width="20*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Text="Sales" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="1" Text="Net" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="2" Text="Vat" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="3" Text="Gross" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                    </Grid>
+                    <ListView x:Name="SalesListView" BackgroundColor="Transparent" HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40*" />
+                                            <ColumnDefinition Width="20*" />
+                                            <ColumnDefinition Width="20*" />
+                                            <ColumnDefinition Width="20*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}" TextColor="White" FontSize="Small" />
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Net}" TextColor="White" FontSize="Small" />
+                                        <Label Grid.Row="0" Grid.Column="2" Text="{Binding Vat}" TextColor="White" FontSize="Small" />
+                                        <Label Grid.Row="0" Grid.Column="3" Text="{Binding Gross}" TextColor="White" FontSize="Small" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+                <StackLayout HeightRequest="120">
+                    <Label Text="PAYMENTS" FontSize="Medium" TextColor="White" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*" />
+                            <ColumnDefinition Width="20*" />
+                            <ColumnDefinition Width="20*" />
+                            <ColumnDefinition Width="20*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Text="Payments" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="1" Text="Epos" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="2" Text="Actual" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="3" Text="Variance" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                    </Grid>
+                    <ListView x:Name="PaymentsListView" BackgroundColor="Transparent" HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40*" />
+                                            <ColumnDefinition Width="20*" />
+                                            <ColumnDefinition Width="20*" />
+                                            <ColumnDefinition Width="20*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}" TextColor="White" FontSize="Small" />
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Epos}" TextColor="White" FontSize="Small" />
+                                        <Label Grid.Row="0" Grid.Column="2" Text="{Binding Actual}" TextColor="White" FontSize="Small" />
+                                        <Label Grid.Row="0" Grid.Column="3" Text="{Binding Variance}" TextColor="White" FontSize="Small" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+                <StackLayout HeightRequest="150">
+                    <Label Text="TOTALS" FontSize="Medium" TextColor="White" />
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80*" />
+                                <ColumnDefinition Width="20*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="Gross" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                            
+                            <Label Grid.Row="1" Grid.Column="0" Text="Expected Till:" FontSize="Small" TextColor="White" />
+                            <Label Grid.Row="1" Grid.Column="1" x:Name="ExpectedTillText" FontSize="Small" TextColor="White" />
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="Epos" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="2" Text="Actual" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="3" Text="Variance" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+
+                            <Label Grid.Row="1" Grid.Column="0" Text="Actual Till:" FontSize="Small" TextColor="White" />
+                            <Label Grid.Row="1" Grid.Column="1" x:Name="ActualTillEposText"  FontSize="Small" TextColor="White" />
+                            <Label Grid.Row="1" Grid.Column="2" x:Name="ActualTillActualText" FontSize="Small" TextColor="White" />
+                            <Label Grid.Row="1" Grid.Column="3" x:Name="ActualTillVarianceText" FontSize="Small" TextColor="White" />
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="NOTES" FontSize="Medium" TextColor="White" />
+                    <Label x:Name="NotesText" FontSize="Small" TextColor="White" LineBreakMode="WordWrap" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
