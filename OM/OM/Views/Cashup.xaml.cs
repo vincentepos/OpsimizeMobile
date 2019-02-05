@@ -2,14 +2,11 @@
 using OM.Data;
 using OM.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -32,6 +29,7 @@ namespace OM.Views
             InitializeComponent ();
             Init();
             GetCashup();
+            BindingContext = new CashupList();
 		}
 
         void Init()
@@ -67,13 +65,19 @@ namespace OM.Views
             PaymentsListView.ItemsSource = paysorted;
 
             //---- Totals ----//
-            ExpectedTillText.Text = ObjList.ExpectedTill.ToString();
+            //ExpectedTillText.Text = ObjList.ExpectedTill.ToString();
             ActualTillActualText.Text = ObjList.ActualTillActual.ToString();
             ActualTillEposText.Text = ObjList.ActualTillEpos.ToString();
             ActualTillVarianceText.Text = ObjList.ActualTillVariance.ToString();
             NotesText.Text = ObjList.CashupNotes;
             CashupByText.Text = ObjList.CashupBy;
             CashupDateText.Text = ObjList.CashupDate.ToString("dd/MM/yyyy HH:mm");
+
+
+            
+            
         }
+
+
     }
 }
