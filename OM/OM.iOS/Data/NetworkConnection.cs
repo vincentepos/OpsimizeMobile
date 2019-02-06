@@ -21,6 +21,7 @@ namespace OM.iOS.Data
         public void CheckInternetConnection()
         {
             InternetStatus();
+            IsConnceted = InternetStatus();
         }
 
         public bool InternetStatus()
