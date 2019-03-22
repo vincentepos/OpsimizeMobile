@@ -39,6 +39,14 @@
                     </Image.GestureRecognizers>
                 </Image>
 
+                <Image Grid.Row="2" Source="cashup256.png" HorizontalOptions="Start" HeightRequest="128" WidthRequest="128">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                Tapped="CashupProcedure"
+                NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+
                 <!--<Image Grid.Row="2" Source="quickdelivery256.png" HorizontalOptions="Start" HeightRequest="128" WidthRequest="128">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer

@@ -25,6 +25,7 @@ namespace OM.Views
         public string username;
         public string password;
         public DeviceToken deviceToken = new DeviceToken();
+        User users = new User();
 
         public Dashboard (User user)
 		{
@@ -33,7 +34,6 @@ namespace OM.Views
 			InitializeComponent ();
             App.StartCheckIfInternet(lbl_NoInternet, this);
             Init();
-            User users = new User();
             users = user;
             Console.WriteLine("Username: " + users.Username);
 
@@ -94,6 +94,11 @@ namespace OM.Views
         async void NewPOProcedure(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NewPO(username, password));
+        }
+
+        async void CashupProcedure(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Dashboard2(users));
         }
 
         //async void QuickDeliveryProcedure(object sender, EventArgs e)

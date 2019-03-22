@@ -267,4 +267,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\NotiIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cashup256.png" />
+  </ItemGroup>
 </Project>
