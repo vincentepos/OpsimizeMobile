@@ -18,8 +18,8 @@ namespace OM.Models
         public static string NoInternetText = "No Internet Connection";
 
         //-------------Base URL------------//
-        public static string BaseURL = "https://app.opsimize.com/rest/mobileapp/v1/";
-        //public static string BaseURL = "http://opsimize.eposability.com/rest/mobileapp/v1/";
+        //public static string BaseURL = "https://app.opsimize.com/rest/mobileapp/v1/";
+        public static string BaseURL = "http://opsimize.eposability.com/rest/mobileapp/v1/";
         //public static string BaseURL = "http://10.0.2.2:8081/rest/mobileapp/v1/";
 
         //-------------Login------------//

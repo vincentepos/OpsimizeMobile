@@ -168,9 +168,15 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_80 copy.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_76 copy.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_152 copy.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_167 copy.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_76 copy.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_152 copy.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon_167 copy.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
