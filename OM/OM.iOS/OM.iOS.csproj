@@ -112,8 +112,13 @@
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
     <BundleResource Include="GoogleService-Info.plist" />
-    <None Include="Info.plist" />
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <BundleResource Include="Resources\FontAwesome5Brands.otf" />
+    <BundleResource Include="Resources\FontAwesome5Regular.otf" />
+    <BundleResource Include="Resources\FontAwesome5Solid.otf" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\Contents.json">
@@ -269,5 +274,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\cashup256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unlocked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\locked.png" />
   </ItemGroup>
 </Project>

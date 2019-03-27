@@ -98,6 +98,12 @@ namespace OM.Models
         public static string AllNotifications = BaseURL + "Notifications/AllNotifications ";
 
         //-------------Get Last Notification---------------//
-        public static string Cashup = BaseURL + "Cashup/TradingPeriodByID"; //?NotificationID=123456
+        public static string Cashup = BaseURL + "Cashup/TradingPeriodByID"; //?TradingDateID=6374
+
+        //-------------Get Tills By Site---------------//
+        public static string TillList = BaseURL + "Cashup/GetTillsBySite"; //?SiteID=40
+
+        //-------------Get Site List---------------//
+        public static string SiteList = BaseURL + "Sites/SiteList"; 
     }
 }

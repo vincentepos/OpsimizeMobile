@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OM.Views.Dashboard2"
-             Title="Notifications">
+             Title="Select Site">
     <ContentPage.Content>
 
         <StackLayout>
@@ -20,10 +20,25 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Text="Notification Title" TextColor="White" FontSize="Small" TextDecorations="Underline" />
+                <Label Grid.Row="0" Text="Site Name" TextColor="White" FontSize="Small" TextDecorations="Underline" />
             </Grid>
 
-            <ListView x:Name="NotificationsListView" BackgroundColor="Transparent" HasUnevenRows="True">
+            <ListView x:Name="SiteListView" BackgroundColor="Transparent" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="{Binding SiteName}" TextColor="White" FontSize="Small" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--<ListView x:Name="SiteListView" BackgroundColor="Transparent" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -39,9 +54,9 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
 
-            <Button Text="Logout" Clicked="LogoutProcedure" BackgroundColor="Silver" TextColor="Black"/>
+            <!--<Button Text="Logout" Clicked="LogoutProcedure" BackgroundColor="Silver" TextColor="Black"/>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

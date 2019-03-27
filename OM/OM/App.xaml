@@ -3,6 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OM.App">
 	<Application.Resources>
-    
-	</Application.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeBrands" Android="FontAwesome5Brands.otf" iOS="FontAwesome5Brands">
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String"  x:Key="FontAwesomeSolid" Android="FontAwesome5Solid.otf#Regular" iOS="FontAwesome5Solid-Solid">
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeRegular" Android="FontAwesome5Regular.otf#Regular" iOS="FontAwesome5Free-Regular">
+            </OnPlatform>
+        </ResourceDictionary>
+
+    </Application.Resources>
 </Application>

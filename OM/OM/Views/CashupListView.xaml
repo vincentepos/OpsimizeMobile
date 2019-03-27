@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.CashupListView"
+             Title="Cashup Per Till">
+    <ContentPage.Content>
+
+        <StackLayout>
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="30, 10, 30, 0" 
+                            iOS="30, 10, 30, 0"/>
+            </StackLayout.Padding>
+
+            <!--<SearchBar x:Name="notification_search" Placeholder="Search" TextColor="Black" />-->
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Till Name" TextColor="White" FontSize="Small" TextDecorations="Underline" />
+                <Label Grid.Row="0" Text="Date" TextColor="White" FontSize="Small" TextDecorations="Underline" HorizontalTextAlignment="End" />
+            </Grid>
+
+            <ListView x:Name="TillListView" BackgroundColor="Transparent" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="{Binding TillColor}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="{Binding TillName}" TextColor="Black" FontSize="Small" />
+                                <Label Grid.Row="0" Text="{Binding CashupDate, StringFormat='\{0:dd/MM/yyyy HH:mm}'}" TextColor="Black" FontSize="Small" HorizontalTextAlignment="End" />
+                                <Label Grid.Row="1" Text="{Binding TillTotal}" TextColor="Black" FontSize="Small" />
+                                <Image Grid.Row="1" Source="{Binding TillLocked}" HorizontalOptions="End" WidthRequest="16" HeightRequest="16"/>
+                                <!--<Label Grid.Row="1" Text="{Binding TillStatus}" TextColor="Black" HorizontalTextAlignment="End" FontSize="Small" />-->
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
