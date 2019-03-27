@@ -40,7 +40,7 @@
 		<string>remote-notification</string>
 	</array>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.24</string>
+	<string>1.2.25</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library.</string>
 	<key>NSCameraUsageDescription</key>
@@ -52,6 +52,6 @@
 	<key>irebaseMessagingAutoInitEnabled</key>
 	<true/>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>25</string>
 </dict>
 </plist>
