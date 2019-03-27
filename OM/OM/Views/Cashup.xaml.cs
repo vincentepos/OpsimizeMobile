@@ -19,13 +19,13 @@ namespace OM.Views
         public ObservableCollection<PayT> PayCollection { get; set; }
         public string username;
         public string password;
-        public long NotificationID;
+        public long TradingDateID;
 
         public Cashup (string un, string pw, long nid)
 		{
             username = un;
             password = pw;
-            NotificationID = nid;
+            TradingDateID = nid;
             InitializeComponent ();
             Init();
             GetCashup();
@@ -45,7 +45,7 @@ namespace OM.Views
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
             client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
-            var response = await client.GetAsync(Constants.Cashup + "?NotificationID=" + NotificationID);
+            var response = await client.GetAsync(Constants.Cashup + "?TradingDateID=" + TradingDateID);
 
             var cashupJson = await response.Content.ReadAsStringAsync();
             CashupList ObjList = new CashupList();

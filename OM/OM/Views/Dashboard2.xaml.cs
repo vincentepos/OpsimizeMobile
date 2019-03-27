@@ -18,12 +18,12 @@ namespace OM.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Dashboard2 : ContentPage
 	{
-        public ObservableCollection<Notifications> YourCollection { get; set; }
-        public List<Notifications> Items = new List<Notifications>();
+        public ObservableCollection<RootSite> YourCollection { get; set; }
+        public List<RootSite> Items = new List<RootSite>();
         public string username;
         public string password;
         public DeviceToken deviceToken = new DeviceToken();
-        public long NID;
+        public long SiteID;
 
         public Dashboard2 (User user)
 		{
@@ -32,7 +32,7 @@ namespace OM.Views
             InitializeComponent ();
             App.StartCheckIfInternet(lbl_NoInternet, this);
             Init();
-            GetNotification();
+            GetSiteList();
             InitSearchBar();
 
             if (Device.RuntimePlatform == Device.Android)
@@ -85,7 +85,7 @@ namespace OM.Views
             notification_search.BackgroundColor = Constants.BackgroundColor;
         }
 
-        public async void GetNotification()
+        public async void GetSiteList()
         {
             var client = new HttpClient();
             client.MaxResponseContentBufferSize = 256000;
@@ -93,26 +93,26 @@ namespace OM.Views
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             string userAndPasswordToken = Convert.ToBase64String(Encoding.UTF8.GetBytes(username + ":" + password));
             client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Basic {userAndPasswordToken}");
-            var response = await client.GetAsync(Constants.AllNotifications);
+            var response = await client.GetAsync(Constants.SiteList);
 
-            var notificationJson = await response.Content.ReadAsStringAsync();
-            NotificationList ObjList = new NotificationList();
-            if (notificationJson != "")
+            var siteJson = await response.Content.ReadAsStringAsync();
+            RootSiteList ObjList = new RootSiteList();
+            if (siteJson != "")
             {
-                ObjList = JsonConvert.DeserializeObject<NotificationList>(notificationJson);
+                ObjList = JsonConvert.DeserializeObject<RootSiteList>(siteJson);
             }
-            YourCollection = new ObservableCollection<Notifications>(ObjList.Notifications);
-            Items = ObjList.Notifications;
-            var sorted = YourCollection.OrderByDescending(x => x.SendDate).ToList();
-            NotificationsListView.ItemsSource = sorted;
-            NotificationsListView.ItemTapped += NotificationsListView_ItemTapped;
+            YourCollection = new ObservableCollection<RootSite>(ObjList.SiteList);
+            Items = ObjList.SiteList;
+            var sorted = YourCollection.OrderBy(x => x.SiteName).ToList();
+            SiteListView.ItemsSource = sorted;
+            SiteListView.ItemTapped += SiteListView_ItemTapped;
         }
 
-        public void NotificationsListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        public void SiteListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Notifications item = (Notifications)e.Item;
-            NID = item.NotificationID;
-            Navigation.PushAsync(new Cashup(username, password, NID));
+            RootSite item = (RootSite)e.Item;
+            SiteID = item.SiteID;
+            Navigation.PushAsync(new CashupListView(username, password, SiteID));
 
             //if (item.Status == "Draft PO")
             //{
@@ -133,23 +133,23 @@ namespace OM.Views
 
         private void FilterItem(string filter)
         {
-            NotificationsListView.BeginRefresh();
+            SiteListView.BeginRefresh();
             if (string.IsNullOrWhiteSpace(filter))
             {
-                NotificationsListView.ItemsSource = Items;
+                SiteListView.ItemsSource = Items;
             }
             else
             {
-                NotificationsListView.ItemsSource = Items.Where(X => (X.Title.ToLower().Contains(filter.ToLower()) || X.SendTo.ToLower().Contains(filter.ToLower()) || X.SendDate.ToLongDateString().Contains(filter.ToLower())));
+                SiteListView.ItemsSource = Items.Where(X => (X.SiteName.ToLower().Contains(filter.ToLower())));
             }
-            NotificationsListView.EndRefresh();
+            SiteListView.EndRefresh();
         }
 
-        void LogoutProcedure(object sender, EventArgs e)
-        {
-            App.Current.MainPage = new NavigationPage(new LoginPage());
-            App.CredentialsServce.DeleteCredentials();
-            DisplayAlert("Logout", "Logged Out", "Ok");
-        }
+        //void LogoutProcedure(object sender, EventArgs e)
+        //{
+        //    App.Current.MainPage = new NavigationPage(new LoginPage());
+        //    App.CredentialsServce.DeleteCredentials();
+        //    DisplayAlert("Logout", "Logged Out", "Ok");
+        //}
     }
 }

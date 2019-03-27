@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OM.Views.SiteListView"
+             Title="Select Site">
+    <ContentPage.Content>
+
+        <StackLayout>
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" 
+                            Android="30, 10, 30, 0" 
+                            iOS="30, 10, 30, 0"/>
+            </StackLayout.Padding>
+
+            <Label x:Name="lbl_NoInternet" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="Red" />
+
+            <SearchBar x:Name="notification_search" Placeholder="Search" TextColor="Black" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="Site Name" TextColor="White" FontSize="Small" TextDecorations="Underline" />
+            </Grid>
+
+            <ListView x:Name="SiteListView2" BackgroundColor="Transparent" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid HeightRequest="50">
+                                <Label Text="{Binding SiteName}" TextColor="White" FontSize="Medium" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -98,7 +98,7 @@ namespace OM.Views
 
         async void CashupProcedure(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Dashboard2(users));
+            await Navigation.PushAsync(new SiteListView(users));
         }
 
         //async void QuickDeliveryProcedure(object sender, EventArgs e)

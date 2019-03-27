@@ -19,6 +19,9 @@
     <EmbeddedResource Update="Views\Cashup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\CashupListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Dashboard.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -67,6 +70,9 @@
     <EmbeddedResource Update="Views\QuickDelivery.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\SiteListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\TakeDelivery.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -79,5 +85,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\OM.ipa" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\CashupListView.xaml.cs">
+      <DependentUpon>CashupListView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
