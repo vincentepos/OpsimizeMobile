@@ -20,7 +20,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Text="Site Name" TextColor="White" FontSize="Small" TextDecorations="Underline" />
+                <Label Grid.Row="0" Text="Site Name" TextColor="White" FontSize="Medium" TextDecorations="Underline" />
             </Grid>
 
             <ListView x:Name="SiteListView2" BackgroundColor="Transparent" HasUnevenRows="True">

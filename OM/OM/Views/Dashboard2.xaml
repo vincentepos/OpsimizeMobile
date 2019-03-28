@@ -20,18 +20,15 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Text="Site Name" TextColor="White" FontSize="Small" TextDecorations="Underline" />
+                <Label Grid.Row="0" Text="Site Name" TextColor="White" FontSize="Medium" TextDecorations="Underline" />
             </Grid>
 
             <ListView x:Name="SiteListView" BackgroundColor="Transparent" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Text="{Binding SiteName}" TextColor="White" FontSize="Small" />
+                            <Grid HeightRequest="50">
+                                <Label Grid.Row="0" Text="{Binding SiteName}" TextColor="White" FontSize="Medium" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
