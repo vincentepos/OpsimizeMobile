@@ -9,6 +9,7 @@ using UserNotifications;
 using Firebase.Core;
 using Xamarin.Essentials;
 using Plugin.FirebasePushNotification;
+using KeyboardOverlap.Forms.Plugin.iOSUnified;
 
 namespace OM.iOS
 {
@@ -31,15 +32,16 @@ namespace OM.iOS
 
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+            KeyboardOverlapRenderer.Init();
 
             //if (!App.Current.Properties.ContainsKey("license"))
             //{
             //    App.Current.Properties.Add("license", "");
             //}
 
-                //FirebasePushNotificationManager.Initialize(options, true);
+            //FirebasePushNotificationManager.Initialize(options, true);
 
-                Firebase.Core.App.Configure();
+            Firebase.Core.App.Configure();
 
             Messaging.SharedInstance.Delegate = this;
 
