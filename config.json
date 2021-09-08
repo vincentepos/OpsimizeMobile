@@ -1,0 +1,119 @@
+{
+    "configVersion": 2,
+    "appIdentifier": "com.opsimize.mobile",
+    "appName": "OpsimizeMobile",
+    "bundleName": {
+        "main": "OpsimizeMobile",
+        "dev": "OpsimizeMobiDev"
+    },
+    "deviceTarget": {
+        "phone": true,
+        "tablet": false
+    },
+    "orientation": {
+        "portrait": true,
+        "landscape": true
+    },
+    "permissions": [
+        {
+            "title": "Internet",
+            "name": "android.permission.INTERNET",
+            "platform": "android",
+            "required": true
+        },
+        {
+            "title": "Read External Storage",
+            "name": "android.permission.READ_EXTERNAL_STORAGE",
+            "platform": "android",
+            "required": true
+        },
+        {
+            "title": "System Alert Window",
+            "name": "android.permission.SYSTEM_ALERT_WINDOW",
+            "platform": "android",
+            "required": true
+        },
+        {
+            "title": "Write External Storage",
+            "name": "android.permission.WRITE_EXTERNAL_STORAGE",
+            "platform": "android",
+            "required": true
+        },
+        {
+            "title": "Location - Always Usage",
+            "name": "NSLocationAlwaysUsageDescription",
+            "purpose": "To use that feature, the app needs access to your location.",
+            "platform": "ios",
+            "required": true
+        },
+        {
+            "title": "Location - When In Use Usage",
+            "name": "NSLocationWhenInUseUsageDescription",
+            "purpose": "To use that feature, the app needs access to your location.",
+            "platform": "ios",
+            "required": true
+        },
+        {
+            "title": "Location - Always And When in Use Usage",
+            "name": "NSLocationAlwaysAndWhenInUseUsageDescription",
+            "purpose": "To use that feature, the app needs access to your location.",
+            "platform": "ios",
+            "required": true
+        },
+        {
+            "title": "Camera Usage",
+            "name": "NSCameraUsageDescription",
+            "purpose": "The camera can be used to open apps by scanning a QR code.",
+            "platform": "ios",
+            "required": false
+        },
+        {
+            "title": "Photo Library Usage",
+            "name": "NSPhotoLibraryUsageDescription",
+            "purpose": "To use that feature, the app needs access to your photo library.",
+            "platform": "ios",
+            "required": false
+        },
+        {
+            "title": "Photo Library Add Usage",
+            "name": "NSPhotoLibraryAddUsageDescription",
+            "purpose": "To use that feature, the app needs access to your photo library.",
+            "platform": "ios",
+            "required": false
+        }
+    ],
+    "capabilities": {
+        "deepLink": {
+            "value": "",
+            "enabled": false
+        },
+        "maps": {
+            "value": "",
+            "enabled": false
+        },
+        "mapsIos": {
+            "enabled": false
+        },
+        "pushNotifications": {
+            "enabled": true
+        },
+        "crashlytics": {
+            "enabled": false
+        },
+        "firebaseAndroid": {
+            "enabled": true
+        },
+        "firebaseIos": {
+            "enabled": true
+        },
+        "localNotifications": {
+            "enabled": true
+        },
+        "appCenterOTA": {
+            "enabled": false
+        }
+    },
+    "appVersion": "0.0.8",
+    "buildNumber": 8,
+    "runtimeUrl": "https://opsimizemobile-sandbox.mxapps.io/"
+}
