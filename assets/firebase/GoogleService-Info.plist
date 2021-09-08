@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>455659297278-a603e7pq6ruv3mf71s2l2tqkhdqc12fa.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.455659297278-a603e7pq6ruv3mf71s2l2tqkhdqc12fa</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAd32onh9w4Iyoy_lB1E3hPIT_Gzt3ZvFg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>455659297278</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.opsimize.mobile</string>
+	<key>PROJECT_ID</key>
+	<string>opsimize</string>
+	<key>STORAGE_BUCKET</key>
+	<string>opsimize.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:455659297278:ios:c68ae4c562ccd61df5c8af</string>
+	<key>DATABASE_URL</key>
+	<string>https://opsimize.firebaseio.com</string>
+</dict>
+</plist>

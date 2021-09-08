@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "455659297278",
+    "firebase_url": "https://opsimize.firebaseio.com",
+    "project_id": "opsimize",
+    "storage_bucket": "opsimize.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455659297278:android:ef9e16bffdad38f2f5c8af",
+        "android_client_info": {
+          "package_name": "com.opsimize.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "455659297278-tut25t89g2p3mtoc74jvpt9g6q0kavej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhiloSJb4JYTKc8drkfCnFBDZ2ScKcHHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "455659297278-tut25t89g2p3mtoc74jvpt9g6q0kavej.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "455659297278-a603e7pq6ruv3mf71s2l2tqkhdqc12fa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.opsimize.mobile"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455659297278:android:9f78f71498666dd8",
+        "android_client_info": {
+          "package_name": "com.opsimize.opsimizeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "455659297278-tut25t89g2p3mtoc74jvpt9g6q0kavej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhiloSJb4JYTKc8drkfCnFBDZ2ScKcHHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "455659297278-tut25t89g2p3mtoc74jvpt9g6q0kavej.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "455659297278-a603e7pq6ruv3mf71s2l2tqkhdqc12fa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.opsimize.mobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
