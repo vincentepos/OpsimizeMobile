@@ -113,7 +113,7 @@
             "enabled": false
         }
     },
-    "appVersion": "0.0.9",
-    "buildNumber": 9,
+    "appVersion": "0.1.0",
+    "buildNumber": 10,
     "runtimeUrl": "https://opsimizemobile-sandbox.mxapps.io/"
 }
